@@ -1,0 +1,10 @@
+﻿  SDLProj.cpp
+  input.cpp
+  graphics_backend.cpp
+c:\users\user\desktop\deftlib\graphics_backend.cpp(34): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+  graphics.cpp
+c:\users\user\desktop\deftlib\graphics.cpp(16): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+c:\users\user\desktop\deftlib\graphics.cpp(16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
+  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

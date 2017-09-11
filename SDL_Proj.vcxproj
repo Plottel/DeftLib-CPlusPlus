@@ -163,7 +163,7 @@
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="graphics_backend.cpp" />
     <ClCompile Include="input.cpp" />
-    <ClCompile Include="SDLProj.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

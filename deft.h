@@ -8,6 +8,7 @@ namespace deft
 {
 	using namespace graphics;
 	using namespace input;
+	using deft::Key;
 
 	void init()
 	{

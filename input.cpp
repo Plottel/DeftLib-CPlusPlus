@@ -20,6 +20,17 @@ namespace deft
 		// Used to keep track of typed and released states.
 		std::vector<Key> _new_key_events;
 
+		std::vector<std::string> get_held_keys()
+		{
+			std::vector<std::string> result;
+			for (auto& key : _new_key_events)
+			{
+				if (_typed_keys[key])
+					result.push_back(std::string(SDL_GetKeyName(key)));
+			}
+
+			return result;
+		}
 
 		void get_input()
 		{

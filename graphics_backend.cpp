@@ -1,5 +1,6 @@
 #include "graphics_backend.h"
-
+#include "input.h"
+#include "console.h"
 #include <iostream>
 
 namespace deft
@@ -39,6 +40,7 @@ namespace deft
 				);
 
 				font = TTF_OpenFont("lazy.ttf", 12);
+				
 
 				std::cout << TTF_GetError() << std::endl;
 			}
@@ -52,11 +54,22 @@ namespace deft
 			void _be_pre_render()
 			{
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-				SDL_RenderClear(renderer);
+				SDL_RenderClear(renderer);				
 			}
 
 			void _be_post_render()
 			{
+				// Debug rendering here.
+
+				if (console::console_is_on())
+				{
+					if (console::console_input() != "")
+					{
+						graphics::backend::_be_render_text("- CONSOLE -", 10, 10, red);
+						graphics::backend::_be_render_text(console::console_input().c_str(), 10, 20, red);
+					}
+				}				
+
 				SDL_RenderPresent(renderer);
 			}
 

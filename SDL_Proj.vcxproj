@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color.h" />
+    <ClInclude Include="console.h" />
     <ClInclude Include="deft.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="graphics_backend.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="graphics_backend.cpp" />
     <ClCompile Include="input.cpp" />

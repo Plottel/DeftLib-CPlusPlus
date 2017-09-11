@@ -1,8 +1,10 @@
 #include <iostream>
 #include "deft.h"
-#include <SDL.h>
+#include <ctype.h>
 
 using namespace deft;
+using std::vector;
+using std::string;
 
 int main(int argc, char* argv[])
 {
@@ -14,18 +16,13 @@ int main(int argc, char* argv[])
 	while (true)
 	{
 		get_input();
+		update_console();
 
 		// Clear screen
 		pre_render();
 		{
-			for (int i = 0; i < 200; ++i)
-				text("IM RENDERING SOME MOFOFLIPPIN TEXT", 200 + (i * 2), 200 + (i * 2), red);
-
-
-			if (key_typed(SPACE))
-				x += 50;
-			if (key_released(SPACE))
-				x -= 50;
+			if (key_typed(S))
+				toggle_console();
 
 			if (key_down(A))
 				x -= 0.05;

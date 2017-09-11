@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector> 
 
 namespace deft
 {
@@ -163,6 +164,7 @@ namespace deft
 		bool key_down(Key key);		
 		bool key_typed(Key key);
 		bool key_released(Key key);
+		std::vector<std::string> get_held_keys();
 	}
 
 	// Define Key Codes

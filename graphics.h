@@ -14,6 +14,7 @@ namespace deft
 		void pre_render();
 		void post_render();
 
+
 		void quit();
 	}
 }

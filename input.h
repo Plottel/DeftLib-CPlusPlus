@@ -161,6 +161,8 @@ namespace deft
 	{
 		void get_input();
 		bool key_down(Key key);		
+		bool key_typed(Key key);
+		bool key_released(Key key);
 	}
 
 	// Define Key Codes

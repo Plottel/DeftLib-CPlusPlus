@@ -1,6 +1,9 @@
 #include "input.h"
 #include <SDL.h> 
+#include <vector>
+#include <algorithm>
 
+#include <iostream>
 
 namespace deft
 {
@@ -9,29 +12,74 @@ namespace deft
 		const int SDL_KEY_COUNT = 322;
 
 		SDL_Event e;
-		bool _keydown[SDL_KEY_COUNT];
+		bool _down_keys[SDL_KEY_COUNT];
+		bool _typed_keys[SDL_KEY_COUNT];
+		bool _released_keys[SDL_KEY_COUNT];
+		
+		// Refreshed each frame with new key down and key up events.
+		// Used to keep track of typed and released states.
+		std::vector<Key> _new_key_events;
+
 
 		void get_input()
 		{
+			// Events from last frame no longer relevant.
+			// Typed and released is false for last frame's key events.
+			for (auto& key : _new_key_events)
+			{
+				_typed_keys[key] = false;
+				_released_keys[key] = false;
+			}				
+			_new_key_events.clear(); // Ready to process new events
+
+
 			while (SDL_PollEvent(&e) != 0)
 			{
-				//User requests quit
-				if (e.type == SDL_QUIT)
-				{
-					// Do some quit thing.
-				}
-				if (e.type == SDL_KEYUP)
-					_keydown[e.key.keysym.sym] = false;
+				SDL_Keycode key;
 
-				// Set corresponding key down to true
-				if (e.type == SDL_KEYDOWN) 
-					_keydown[e.key.keysym.sym] = true;
+				switch (e.type)
+				{
+				case SDL_QUIT:
+					// Do some quit thing.
+					break;
+
+				case SDL_KEYDOWN:
+					key = e.key.keysym.sym;
+
+					_down_keys[key] = true;
+					if (e.key.repeat == 0)
+						_typed_keys[key] = true;
+					_new_key_events.push_back((Key)key);
+					break;
+
+				case SDL_KEYUP:
+					key = e.key.keysym.sym;
+					_down_keys[e.key.keysym.sym] = false;
+					_released_keys[e.key.keysym.sym] = true;
+					_new_key_events.push_back((Key)e.key.keysym.sym);
+					break;
+
+
+				default:
+					break;
+				}					
 			}
 		}
 
 		bool key_down(Key key)
 		{
-			return _keydown[key];
+			return _down_keys[key];
+		}
+		
+
+		bool key_typed(Key key)
+		{
+			return _typed_keys[key];
+		}
+
+		bool key_released(Key key)
+		{
+			return _released_keys[key];
 		}
 	}
 }

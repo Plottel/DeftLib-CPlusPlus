@@ -18,8 +18,13 @@ int main(int argc, char* argv[])
 		// Clear screen
 		pre_render();
 
-		if (key_down(SPACE))
-			outline_rect(100, 100, 100, 100, red);
+		//if (key_down(SPACE))
+			//outline_rect(100, 100, 100, 100, red);
+
+		if (key_typed(SPACE))
+			x += 50;
+		if (key_released(SPACE))
+			x -= 50;
 
 		if (key_down(A))
 			x -= 0.05;

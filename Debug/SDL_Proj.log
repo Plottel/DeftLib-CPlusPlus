@@ -1,7 +1,7 @@
 ﻿  main.cpp
-c:\users\user\desktop\deftlib\main.cpp(30): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(32): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(34): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(36): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(28): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(30): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(32): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(34): warning C4305: '+=': truncation from 'double' to 'float'
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

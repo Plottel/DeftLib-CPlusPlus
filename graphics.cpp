@@ -17,6 +17,11 @@ namespace deft
 			backend::_be_outline_rect(&rect, clr);
 		}
 
+		void text(std::string text, float x, float y, Color& clr)
+		{
+			backend::_be_render_text(text.c_str(), x, y, clr);
+		}
+
 		void pre_render()
 		{
 			backend::_be_pre_render();
@@ -25,6 +30,11 @@ namespace deft
 		void post_render()
 		{
 			backend::_be_post_render();
+		}
+
+		void quit()
+		{
+			backend::_be_quit();
 		}
 	}	
 }

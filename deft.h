@@ -4,6 +4,7 @@
 #include "color.h"
 #include "input.h"
 #include "console.h"
+#include "audio.h"
 
 #define DEFT_SHORTHAND
 
@@ -13,6 +14,7 @@ namespace deft
 #ifdef DEFT_SHORTHAND
 	using namespace graphics;
 	using namespace input;
+	using namespace audio;
 	using namespace console;
 	using deft::Key;
 #endif
@@ -20,5 +22,12 @@ namespace deft
 	void init()
 	{
 		graphics::init();
+		audio::init();
+	}
+
+	void quit()
+	{
+		graphics::quit();
+		audio::quit();
 	}
 }

@@ -156,6 +156,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audio.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="deft.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="graphics_backend.cpp" />

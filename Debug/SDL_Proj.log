@@ -1,7 +1,26 @@
 ﻿  main.cpp
-c:\users\user\desktop\deftlib\main.cpp(28): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(30): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(32): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(34): warning C4305: '+=': truncation from 'double' to 'float'
-  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
-  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)
+c:\users\user\desktop\deftlib\main.cpp(30): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(32): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(34): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(36): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(39): error C2660: 'deft::audio::play_sound': function does not take 0 arguments
+  audio.cpp
+c:\users\user\desktop\deftlib\audio.cpp(33): error C3875: call of non-static member function missing argument list
+c:\users\user\desktop\deftlib\audio.cpp(33): error C3312: no callable 'begin' function found for type 'std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>::value_compare (void)'
+          with
+          [
+              _Kty=std::string,
+              _Ty=Mix_Chunk *,
+              _Pr=std::less<std::string>,
+              _Alloc=std::allocator<std::pair<const std::string,Mix_Chunk *>>
+          ]
+c:\users\user\desktop\deftlib\audio.cpp(33): error C3312: no callable 'end' function found for type 'std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>::value_compare (void)'
+          with
+          [
+              _Kty=std::string,
+              _Ty=Mix_Chunk *,
+              _Pr=std::less<std::string>,
+              _Alloc=std::allocator<std::pair<const std::string,Mix_Chunk *>>
+          ]
+c:\users\user\desktop\deftlib\audio.cpp(33): error C2065: 'chunk': undeclared identifier
+  Generating Code...

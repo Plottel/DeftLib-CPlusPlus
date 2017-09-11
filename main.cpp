@@ -10,6 +10,8 @@ int main(int argc, char* argv[])
 {
 	deft::init();
 
+	load_sound("scratch");
+
 	float x = 100;
 	float y = 100;
 
@@ -21,7 +23,7 @@ int main(int argc, char* argv[])
 		// Clear screen
 		pre_render();
 		{
-			if (key_typed(S))
+			if (key_typed(O))
 				toggle_console();
 
 			if (key_down(A))
@@ -32,6 +34,9 @@ int main(int argc, char* argv[])
 				y -= 0.05;
 			if (key_down(S))
 				y += 0.05;
+
+			if (key_down(S))
+				play_sound();
 
 			outline_rect(x, y, 30, 30, red);
 		}

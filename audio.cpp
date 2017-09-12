@@ -22,16 +22,19 @@ namespace deft
 			Mix_PlayChannel(-1, sounds[name], 0);
 		}
 
-		void loud_sound(string name)
+		void loop_sound(string name, int count)
 		{
-			sounds[name] = Mix_LoadWAV((name + ".wav").c_str());
+			Mix_PlayChannel(-1, sounds[name], count - 1); // SDL loops for one extra?
+		}
+
+		void load_sound(std::string name)
+		{
+			sounds[name] = Mix_LoadWAV(name.c_str());
 		}
 
 		void quit()
 		{
-			for (auto& chunk : sounds.value_comp)
-				Mix_FreeChunk(chunk);
-
+			// TODO: Free chunks
 			Mix_Quit();
 		}
 	}

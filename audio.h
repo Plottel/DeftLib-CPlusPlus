@@ -9,5 +9,6 @@ namespace deft
 		void quit();
 		void load_sound(std::string name);
 		void play_sound(std::string name);
+		void loop_sound(std::string name, int count);
 	}
 }

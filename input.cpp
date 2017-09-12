@@ -57,7 +57,11 @@ namespace deft
 				case SDL_KEYDOWN:
 					key = e.key.keysym.sym;
 
+					if (!isascii(key))
+						key = e.key.keysym.scancode;
+
 					_down_keys[key] = true;
+
 					if (e.key.repeat == 0)
 						_typed_keys[key] = true;
 					_new_key_events.push_back((Key)key);
@@ -65,9 +69,13 @@ namespace deft
 
 				case SDL_KEYUP:
 					key = e.key.keysym.sym;
-					_down_keys[e.key.keysym.sym] = false;
-					_released_keys[e.key.keysym.sym] = true;
-					_new_key_events.push_back((Key)e.key.keysym.sym);
+
+					if (!isascii(key))
+						key = e.key.keysym.scancode;
+
+					_down_keys[key] = false;
+					_released_keys[key] = true;
+					_new_key_events.push_back((Key)key);
 					break;
 
 

@@ -67,6 +67,16 @@ int main(int argc, char* argv[])
 		if (key_typed(_9))
 			toggle_music();
 
+
+		if (input::key_typed(RETURN) && console_is_on())
+		{
+			std::cout << console_input() << std::endl;
+
+			// Process console input
+			if (to_lower(console_input()) == "play music")
+				play_music("jumpshot.mp3");
+		}
+
 		//
 		// Rendering
 		//

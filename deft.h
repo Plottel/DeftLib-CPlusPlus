@@ -6,6 +6,8 @@
 #include "console.h"
 #include "audio.h"
 #include "geometry.h"
+#include <algorithm>
+#include <cctype>
 
 #define DEFT_SHORTHAND
 
@@ -31,5 +33,11 @@ namespace deft
 	{
 		graphics::quit();
 		audio::quit();
+	}
+
+	std::string to_lower(std::string string)
+	{
+		transform(string.begin(), string.end(), string.begin(), ::tolower);
+		return string;
 	}
 }

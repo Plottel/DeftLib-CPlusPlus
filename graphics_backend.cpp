@@ -39,7 +39,7 @@ namespace deft
 					SDL_RENDERER_ACCELERATED
 				);
 
-				font = TTF_OpenFont("lazy.ttf", 12);
+				font = TTF_OpenFont("console_font.ttf", 12);
 				
 
 				std::cout << TTF_GetError() << std::endl;
@@ -113,11 +113,9 @@ namespace deft
 
 				if (console::console_is_on())
 				{
-					if (console::console_input() != "")
-					{
-						graphics::backend::_be_render_text("- CONSOLE -", 10, 10, red);
-						graphics::backend::_be_render_text(console::console_input().c_str(), 10, 20, red);
-					}
+					graphics::backend::_be_render_text("- CONSOLE -", 10, 10, red);
+					if (console::console_input() != "")						
+						graphics::backend::_be_render_text(console::console_input().c_str(), 10, 30, blue);
 				}				
 
 				SDL_RenderPresent(renderer);

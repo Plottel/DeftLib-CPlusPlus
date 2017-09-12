@@ -11,6 +11,8 @@ namespace deft
 	namespace audio
 	{
 		map<string, Mix_Chunk*> sounds;
+		map<string, Mix_Music*> musics;
+		bool _is_playing_music = false;
 
 		void init()
 		{
@@ -32,9 +34,51 @@ namespace deft
 			sounds[name] = Mix_LoadWAV(name.c_str());
 		}
 
+		void load_music(std::string name)
+		{
+			musics[name] = Mix_LoadMUS(name.c_str());
+		}
+
+		void play_music(std::string name)
+		{
+			Mix_PlayMusic(musics[name], -1);
+			_is_playing_music = true;
+		}
+
+		void pause_music()
+		{
+			Mix_PauseMusic();
+			_is_playing_music = false;
+		}
+
+		void resume_music()
+		{
+			Mix_ResumeMusic();
+			_is_playing_music = true;
+		}
+
+		void toggle_music()
+		{
+			if (_is_playing_music)
+				pause_music();
+			else
+				resume_music();
+		}
+
+		void stop_music()
+		{
+			// If music is playing
+			if (Mix_PlayingMusic() > 0)
+			{
+				Mix_HaltMusic();
+				_is_playing_music = false;
+			}				
+		}
+
 		void quit()
 		{
 			// TODO: Free chunks
+			// TODO: Free musics
 			Mix_Quit();
 		}
 	}

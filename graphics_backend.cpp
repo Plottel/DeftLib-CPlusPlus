@@ -51,6 +51,56 @@ namespace deft
 				SDL_RenderDrawRect(renderer, rect);
 			}
 
+			void _be_fill_circle(float x, float y, int radius, Color clr)
+			{
+				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
+
+				for (int w = 0; w < radius * 2; ++w)
+				{
+					for (int h = 0; h < radius * 2; ++h)
+					{
+						int dx = radius - w; // horizontal offset
+						int dy = radius - h; // vertical offset
+
+						if ((dx*dx + dy*dy) <= (radius * radius))
+							SDL_RenderDrawPoint(renderer, x + dx, y + dy);
+
+					}
+				}
+			}
+
+			void _be_outline_circle(float x, float y, int radius, Color clr)
+			{
+				// Draw a circle using Bresenham's circle drawing method.
+				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
+
+				int x2 = 0;
+				int y2 = radius;
+				int p = 3 - (2 * radius);
+
+				while (x2 <= y2)
+				{
+					SDL_RenderDrawPoint(renderer, x + x2, y + y2);
+					SDL_RenderDrawPoint(renderer, x - x2, y + y2);
+					SDL_RenderDrawPoint(renderer, x + x2, y - y2);
+					SDL_RenderDrawPoint(renderer, x - x2, y - y2);
+					SDL_RenderDrawPoint(renderer, x + y2, y + x2);
+					SDL_RenderDrawPoint(renderer, x + y2, y - x2);
+					SDL_RenderDrawPoint(renderer, x - y2, y + x2);
+					SDL_RenderDrawPoint(renderer, x - y2, y - x2);
+
+					x2 = x2 + 1;
+
+					if (p<0)
+						p = p + 4 * (x2)+6;
+					else
+					{
+						p = p + 4 * (x2 - y2) + 10;
+						y2 = y2 - 1;
+					}
+				}
+			}
+
 			void _be_pre_render()
 			{
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

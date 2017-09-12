@@ -11,7 +11,12 @@ namespace deft
 		namespace backend
 		{
 			void _be_init();
+
 			void _be_outline_rect(SDL_Rect* rect, Color clr);
+			void _be_fill_circle(float x, float y, int radius, Color clr);
+			void _be_outline_circle(float x, float y, int radius, Color clr);
+
+
 			void _be_pre_render();
 			void _be_post_render();
 

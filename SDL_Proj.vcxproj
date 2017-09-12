@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h" />
+    <ClInclude Include="geometry.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="deft.h" />

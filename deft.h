@@ -5,6 +5,7 @@
 #include "input.h"
 #include "console.h"
 #include "audio.h"
+#include "geometry.h"
 
 #define DEFT_SHORTHAND
 
@@ -16,6 +17,7 @@ namespace deft
 	using namespace input;
 	using namespace audio;
 	using namespace console;
+	using namespace geometry;
 	using deft::Key;
 #endif
 

@@ -17,6 +17,22 @@ namespace deft
 			backend::_be_outline_rect(&rect, clr);
 		}
 
+		void outline_rect(Rect rect, Color clr)
+		{
+			SDL_Rect sdl_rect = { rect.x, rect.y, rect.w, rect.h };
+			backend::_be_outline_rect(&sdl_rect, clr);
+		}
+
+		void outline_circle(Circle circle, Color clr)
+		{
+			backend::_be_outline_circle(circle.x, circle.y, circle.radius, clr);
+		}
+
+		void fill_circle(Circle circle, Color clr)
+		{
+			backend::_be_fill_circle(circle.x, circle.y, circle.radius, clr);			
+		}		
+
 		void text(std::string text, float x, float y, Color& clr)
 		{
 			backend::_be_render_text(text.c_str(), x, y, clr);

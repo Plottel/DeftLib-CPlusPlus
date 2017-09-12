@@ -19,10 +19,17 @@ int main(int argc, char* argv[])
 	Rect r2 = { 300, 300, 75, 75 };
 
 	Circle c1 = { 250, 250, 45 };
-
 	Circle c2 = { 350, 100, 20 };
 
 	Color r_clr = red;
+
+	TextBox box;
+
+	box.rect.w = 100;
+	box.rect.h = 40;
+	box.rect.x = 200;
+	box.rect.y = 200;
+	box.text = "IM TEXTING HERE";
 
 	while (true)
 	{
@@ -32,7 +39,7 @@ int main(int argc, char* argv[])
 		//
 		// Game Logic
 		//
-
+#pragma region Game Logic
 		if (key_typed(O))
 			toggle_console();
 
@@ -73,10 +80,13 @@ int main(int argc, char* argv[])
 			std::cout << console_input() << std::endl;
 
 			// Process console input
-			if (to_lower(console_input()) == "play music")
+			if (console_input() == "play music")
 				play_music("jumpshot.mp3");
 		}
+#pragma endregion Game Logic
 
+		
+		
 		//
 		// Rendering
 		//
@@ -93,6 +103,14 @@ int main(int argc, char* argv[])
 			outline_rect(r2, r_clr);
 			outline_circle(c1, r_clr);
 			outline_circle(c2, r_clr);
+
+			draw_textbox(box);
+
+
+			// Render console
+			if (console_is_on())
+				draw_textbox(console::console_textbox);
+
 		}
 		// Refresh screen
 		post_render();

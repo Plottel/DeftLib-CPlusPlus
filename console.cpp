@@ -1,16 +1,36 @@
 #include "console.h"
 #include "graphics_backend.h"
+#include "graphics_ui.h"
 #include "input.h"
 #include <string>
 #include <map>
 #include <cctype>
 #include <sstream>
 #include <functional>
+#include "geometry.h"
+#include <iostream>
+#include <algorithm>
 
 namespace deft
 {
 	namespace console
 	{
+		std::string to_lower(std::string string)
+		{
+			transform(string.begin(), string.end(), string.begin(), ::tolower);
+			return string;
+		}
+
+
+
+		bool _is_reading_console_input = false;
+		graphics::TextBox console_textbox;
+
+		void init()
+		{
+			console_textbox = graphics::TextBox{ "- CONSOLE -", Rect{ 10, 10, 100, 100 }, red, blue };
+		}
+
 		std::vector<std::string> split_string(std::string& string, const char& splitter)
 		{
 			std::vector<std::string> result;
@@ -23,25 +43,10 @@ namespace deft
 			return result;
 		}
 
-		//std::function<return_type(paramter_type_1, paramter_type_2, paramter_type_3)
-
-		typedef struct
-		{
-			void* func;
-			int arg_count;
-		} ConsoleCallBack;
-
-		std::map < std::string, void(*)()> actions;
-
-		std::map<std::string, ConsoleCallBack> _console_callbacks;
-
-		std::string _console_input = "";
-		bool _is_reading_console_input;
-
 
 		void toggle_console()
 		{
-			_console_input = "";
+			console_textbox.text = "";
 			_is_reading_console_input = !_is_reading_console_input;
 		}
 
@@ -52,15 +57,8 @@ namespace deft
 
 		const std::string& console_input()
 		{
-			return _console_input;
-		}
-
-		// NOTE: Cannot have spaces in "name"
-		// NOTE: Name must be all caps.
-		void add_console_command(std::string name, void* callback_func, int arg_count)
-		{
-			_console_callbacks[name] = { callback_func, arg_count };
-		}
+			return console_textbox.text;
+		}	
 
 		void update_console()
 		{
@@ -70,35 +68,17 @@ namespace deft
 				for (auto& key : input::get_held_keys())
 				{
 					if (key.size() == 1) // Only want alpha chars (not SPACE, RETURN etc.)
-						_console_input += key;
+						console_textbox.text += to_lower(std::string(key.c_str()));
 					else
 					{
 						if (key == "Space")
-							_console_input += " ";
+							console_textbox.text += " ";
 					}
 				}
 
 				// Reset console on BACKSPACE
 				if (input::key_down(BACKSPACE))
-					_console_input = "";
-
-				// Process console command on RETURN / ENTER
-				if (input::key_down(RETURN))
-				{
-					auto input_words = split_string(_console_input, ',');
-
-					auto callback = _console_callbacks[input_words[0]];
-
-					for (int i = 1; i <= callback.arg_count; ++i)
-					{
-						// Make array of arguments to pass to function
-					}
-						
-					// Add check for if (containskey)
-					//_console_callbacks[]
-				}
-
-
+					console_textbox.text = "";
 			}
 		}
 	}

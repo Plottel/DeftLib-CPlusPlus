@@ -27,17 +27,12 @@ namespace deft
 	{
 		graphics::init();
 		audio::init();
+		console::init();
 	}
 
 	void quit()
 	{
 		graphics::quit();
 		audio::quit();
-	}
-
-	std::string to_lower(std::string string)
-	{
-		transform(string.begin(), string.end(), string.begin(), ::tolower);
-		return string;
 	}
 }

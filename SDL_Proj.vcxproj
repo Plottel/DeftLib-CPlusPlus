@@ -163,6 +163,7 @@
     <ClInclude Include="deft.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="graphics_backend.h" />
+    <ClInclude Include="graphics_ui.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="graphics_backend.cpp" />
+    <ClCompile Include="graphics_ui.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -1,7 +1,8 @@
 #include "graphics_backend.h"
 #include "input.h"
-#include "console.h"
 #include <iostream>
+#include "geometry.h"
+
 
 namespace deft
 {
@@ -39,10 +40,15 @@ namespace deft
 					SDL_RENDERER_ACCELERATED
 				);
 
-				font = TTF_OpenFont("console_font.ttf", 12);
+				font = TTF_OpenFont("monaco.ttf", 12);
 				
 
 				std::cout << TTF_GetError() << std::endl;
+			}
+
+			SDL_Rect _be_rect_to_sdl_rect(deft::Rect& rect)
+			{
+				return SDL_Rect{ (int)rect.x, (int)rect.y, (int)rect.w, (int)rect.h };
 			}
 
 			void _be_outline_rect(SDL_Rect* rect, Color clr)
@@ -109,15 +115,6 @@ namespace deft
 
 			void _be_post_render()
 			{
-				// Debug rendering here.
-
-				if (console::console_is_on())
-				{
-					graphics::backend::_be_render_text("- CONSOLE -", 10, 10, red);
-					if (console::console_input() != "")						
-						graphics::backend::_be_render_text(console::console_input().c_str(), 10, 30, blue);
-				}				
-
 				SDL_RenderPresent(renderer);
 			}
 

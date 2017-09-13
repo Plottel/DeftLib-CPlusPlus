@@ -10,6 +10,7 @@ namespace deft
 	{
 		typedef struct
 		{
+			std::string label;
 			std::string text;
 			Rect rect;
 			Color background_color;

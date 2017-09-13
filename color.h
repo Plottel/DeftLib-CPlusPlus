@@ -7,7 +7,12 @@ namespace deft
 		float r, g, b, a;
 	};
 
-	static Color red = { 255, 0, 0, 255 };
-	static Color green = { 0, 255, 0, 255 };
-	static Color blue = { 0, 0, 255, 255 };
+	static const Color red = { 255, 0, 0, 255 };
+	static const Color green = { 0, 255, 0, 255 };
+	static const Color blue = { 0, 0, 255, 255 };
+	static const Color gray = { 108, 123, 139, 255 };
+	static const Color black = { 0, 0, 0, 255 };
+	static const Color faded_black = { 0, 0, 0, 128 };
+	static const Color white = { 255, 255, 255, 0 };
+	static const Color yellow = { 238, 238, 0, 255 };
 }

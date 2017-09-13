@@ -1,9 +1,10 @@
 #include <iostream>
 #include "deft.h"
 #include <ctype.h>
+#include <vector>
 
-using namespace deft;
 using std::vector;
+using namespace deft;
 
 
 int main(int argc, char* argv[])
@@ -29,7 +30,10 @@ int main(int argc, char* argv[])
 	box.rect.h = 40;
 	box.rect.x = 200;
 	box.rect.y = 200;
-	box.text = "IM TEXTING HERE";
+	box.label = "A Textbox";
+	box.text = "Im texting here.";
+	box.background_color = gray;
+	box.text_color = white;
 
 	while (true)
 	{
@@ -85,8 +89,8 @@ int main(int argc, char* argv[])
 		}
 #pragma endregion Game Logic
 
-		
-		
+
+
 		//
 		// Rendering
 		//

@@ -1,7 +1,20 @@
-﻿  main.cpp
-c:\users\user\desktop\deftlib\main.cpp(47): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(49): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(51): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(53): warning C4305: '+=': truncation from 'double' to 'float'
+﻿  graphics_backend.cpp
+c:\users\user\desktop\deftlib\graphics_backend.cpp(56): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(62): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(68): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(87): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(95): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(96): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(99): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(101): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(140): warning C4838: conversion from 'float' to 'Uint8' requires a narrowing conversion
+c:\users\user\desktop\deftlib\graphics_backend.cpp(140): warning C4244: 'initializing': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\user\desktop\deftlib\graphics_backend.cpp(144): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+c:\users\user\desktop\deftlib\graphics_backend.cpp(144): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

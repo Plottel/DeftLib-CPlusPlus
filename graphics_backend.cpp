@@ -40,7 +40,7 @@ namespace deft
 					SDL_RENDERER_ACCELERATED
 				);
 
-				font = TTF_OpenFont("monaco.ttf", 12);
+				font = TTF_OpenFont("Calibri.ttf", 12);
 				
 
 				std::cout << TTF_GetError() << std::endl;
@@ -55,6 +55,12 @@ namespace deft
 			{
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
 				SDL_RenderDrawRect(renderer, rect);
+			}
+
+			void _be_fill_rect(SDL_Rect* rect, Color clr)
+			{
+				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
+				SDL_RenderFillRect(renderer, rect);
 			}
 
 			void _be_fill_circle(float x, float y, int radius, Color clr)

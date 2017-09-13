@@ -21,14 +21,12 @@ namespace deft
 			return string;
 		}
 
-
-
 		bool _is_reading_console_input = false;
 		graphics::TextBox console_textbox;
 
 		void init()
 		{
-			console_textbox = graphics::TextBox{ "- CONSOLE -", Rect{ 10, 10, 100, 100 }, red, blue };
+			console_textbox = graphics::TextBox{ "- CONSOLE -", "", Rect{ 10, 10, 100, 100 }, faded_black, white};
 		}
 
 		std::vector<std::string> split_string(std::string& string, const char& splitter)

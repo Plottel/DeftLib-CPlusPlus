@@ -20,8 +20,20 @@ namespace deft
 
 		void outline_rect(Rect rect, Color clr)
 		{
-			SDL_Rect sdl_rect = { rect.x, rect.y, rect.w, rect.h };
+			SDL_Rect sdl_rect = backend::_be_rect_to_sdl_rect(rect);
 			backend::_be_outline_rect(&sdl_rect, clr);
+		}
+
+		void fill_rect(float x, float y, float w, float h, Color clr)
+		{
+			SDL_Rect rect = { x, y, w, h };
+			backend::_be_fill_rect(&rect, clr);
+		}
+
+		void fill_rect(Rect rect, Color clr)
+		{
+			SDL_Rect sdl_rect = backend::_be_rect_to_sdl_rect(rect);
+			backend::_be_fill_rect(&sdl_rect, clr);
 		}
 
 		void outline_circle(Circle circle, Color clr)

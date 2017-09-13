@@ -11,6 +11,9 @@ namespace deft
 
 		void outline_rect(float x, float y, float w, float h, Color clr);
 		void outline_rect(Rect rect, Color clr);
+
+		void fill_rect(float x, float y, float w, float h, Color clr);
+		void fill_rect(Rect rect, Color clr);
 		
 		void outline_circle(Circle circle, Color clr);
 		void fill_circle(Circle circle, Color clr);

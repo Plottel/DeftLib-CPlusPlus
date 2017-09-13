@@ -13,7 +13,11 @@ namespace deft
 			SDL_Window* window;
 			SDL_Renderer* renderer;
 
-			TTF_Font* font = NULL;
+			Font* font_10 = nullptr;
+			Font* font_12 = nullptr;
+			Font* font_14 = nullptr;
+			Font* font_16 = nullptr;
+			Font* font_24 = nullptr;
 
 			void _be_init()
 			{
@@ -40,7 +44,11 @@ namespace deft
 					SDL_RENDERER_ACCELERATED
 				);
 
-				font = TTF_OpenFont("Calibri.ttf", 12);
+				font_10 = TTF_OpenFont("Calibri.ttf", 10);
+				font_12 = TTF_OpenFont("Calibri.ttf", 12);
+				font_14 = TTF_OpenFont("Calibri.ttf", 14);
+				font_16 = TTF_OpenFont("Calibri.ttf", 16);
+				font_24 = TTF_OpenFont("Calibri.ttf", 24);
 				
 
 				std::cout << TTF_GetError() << std::endl;
@@ -144,12 +152,16 @@ namespace deft
 				SDL_DestroyRenderer(renderer);
 
 
-				TTF_CloseFont(font);
+				TTF_CloseFont(font_10);
+				TTF_CloseFont(font_12);
+				TTF_CloseFont(font_14);
+				TTF_CloseFont(font_16);
+				TTF_CloseFont(font_24);
 
 				SDL_Quit();
 			}
 
-			void _be_render_text(const char* text, float x, float y, Color& clr)
+			void _be_render_text(const char* text, float x, float y, Color& clr, Font* font)
 			{
 				SDL_Color sdl_clr = { clr.r, clr.g, clr.b, clr.a };
 

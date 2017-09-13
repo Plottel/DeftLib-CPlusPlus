@@ -11,6 +11,14 @@ namespace deft
 	{
 		namespace backend
 		{
+			typedef TTF_Font Font;
+
+			extern Font* font_10;
+			extern Font* font_12;
+			extern Font* font_14;
+			extern Font* font_16;
+			extern Font* font_24;
+
 			void _be_init();
 
 			SDL_Rect _be_rect_to_sdl_rect(deft::Rect& rect);
@@ -26,7 +34,7 @@ namespace deft
 
 			void _be_quit();
 			
-			void _be_render_text(const char* text, float x, float y, Color& clr);
+			void _be_render_text(const char* text, float x, float y, Color& clr, Font* font=font_10);
 		}
 	}
 }

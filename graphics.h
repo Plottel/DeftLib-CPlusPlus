@@ -9,8 +9,8 @@ namespace deft
 	{
 		void init();
 
-		void outline_rect(float x, float y, float w, float h, Color clr);
-		void outline_rect(Rect rect, Color clr);
+		void outline_rect(float x, float y, float w, float h, Color clr, int thickness=1);
+		void outline_rect(Rect rect, Color clr, int thickness=1);
 
 		void fill_rect(float x, float y, float w, float h, Color clr);
 		void fill_rect(Rect rect, Color clr);

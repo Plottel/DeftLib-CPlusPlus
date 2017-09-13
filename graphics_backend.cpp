@@ -28,8 +28,8 @@ namespace deft
 					"An SDL2 window",                  // window title
 					SDL_WINDOWPOS_UNDEFINED,           // initial x position
 					SDL_WINDOWPOS_UNDEFINED,           // initial y position
-					640,                               // width, in pixels
-					480,                               // height, in pixels
+					1200,                               // width, in pixels
+					675,                               // height, in pixels
 					SDL_WINDOW_OPENGL                  // flags - see below
 				);
 
@@ -51,10 +51,24 @@ namespace deft
 				return SDL_Rect{ (int)rect.x, (int)rect.y, (int)rect.w, (int)rect.h };
 			}
 
-			void _be_outline_rect(SDL_Rect* rect, Color clr)
+			void _be_outline_rect(SDL_Rect* rect, Color clr, int thickness)
 			{
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
-				SDL_RenderDrawRect(renderer, rect);
+				SDL_RenderDrawRect(renderer, rect);				
+
+				if (thickness <= 1)
+					return;
+
+				SDL_Rect top = { rect->x, rect->y, rect->w, thickness };
+				SDL_Rect bottom = { rect->x, rect->y + rect->h - thickness, rect->w, thickness };
+				SDL_Rect left = { rect->x, rect->y, thickness, rect->h };
+				SDL_Rect right = { rect->x + rect->w - thickness, rect->y, thickness, rect->h };
+
+				// Render thick border
+				SDL_RenderFillRect(renderer, &top);
+				SDL_RenderFillRect(renderer, &bottom);
+				SDL_RenderFillRect(renderer, &left);
+				SDL_RenderFillRect(renderer, &right);
 			}
 
 			void _be_fill_rect(SDL_Rect* rect, Color clr)
@@ -115,7 +129,7 @@ namespace deft
 
 			void _be_pre_render()
 			{
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(renderer, 130, 139, 130, 255);
 				SDL_RenderClear(renderer);				
 			}
 

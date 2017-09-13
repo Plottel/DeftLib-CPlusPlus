@@ -103,8 +103,8 @@ int main(int argc, char* argv[])
 			else
 				r_clr = blue;
 
-			outline_rect(r1, r_clr);
-			outline_rect(r2, r_clr);
+			outline_rect(r1, r_clr, 5);
+			outline_rect(r2, r_clr, 12);
 			outline_circle(c1, r_clr);
 			outline_circle(c2, r_clr);
 

@@ -15,7 +15,7 @@ namespace deft
 
 			SDL_Rect _be_rect_to_sdl_rect(deft::Rect& rect);
 
-			void _be_outline_rect(SDL_Rect* rect, Color clr);
+			void _be_outline_rect(SDL_Rect* rect, Color clr, int thickness=1);
 			void _be_fill_rect(SDL_Rect* rect, Color clr);
 			void _be_fill_circle(float x, float y, int radius, Color clr);
 			void _be_outline_circle(float x, float y, int radius, Color clr);

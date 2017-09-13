@@ -12,16 +12,16 @@ namespace deft
 			backend::_be_init();
 		}
 
-		void outline_rect(float x, float y, float w, float h, Color clr)
+		void outline_rect(float x, float y, float w, float h, Color clr, int thickness)
 		{
 			SDL_Rect rect = { x, y, w, h };
-			backend::_be_outline_rect(&rect, clr);
+			backend::_be_outline_rect(&rect, clr, thickness);
 		}
 
-		void outline_rect(Rect rect, Color clr)
+		void outline_rect(Rect rect, Color clr, int thickness)
 		{
 			SDL_Rect sdl_rect = backend::_be_rect_to_sdl_rect(rect);
-			backend::_be_outline_rect(&sdl_rect, clr);
+			backend::_be_outline_rect(&sdl_rect, clr, thickness);
 		}
 
 		void fill_rect(float x, float y, float w, float h, Color clr)

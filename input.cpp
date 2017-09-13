@@ -16,6 +16,14 @@ namespace deft
 		bool _typed_keys[SDL_KEY_COUNT];
 		bool _released_keys[SDL_KEY_COUNT];
 		
+		namespace
+		{
+			int _mouse_x = 0;
+			int _mouse_y = 0;
+			bool _left_mouse_down = false;;
+			bool _right_mouse_down = false;;
+		}		
+
 		// Refreshed each frame with new key down and key up events.
 		// Used to keep track of typed and released states.
 		std::vector<Key> _new_key_events;
@@ -34,6 +42,9 @@ namespace deft
 
 		void get_input()
 		{
+			_left_mouse_down = false;
+			_right_mouse_down = false;
+
 			// Events from last frame no longer relevant.
 			// Typed and released is false for last frame's key events.
 			for (auto& key : _new_key_events)
@@ -47,6 +58,7 @@ namespace deft
 			while (SDL_PollEvent(&e) != 0)
 			{
 				SDL_Keycode key;
+				auto b = e.button.button;
 
 				switch (e.type)
 				{
@@ -78,12 +90,39 @@ namespace deft
 					_new_key_events.push_back((Key)key);
 					break;
 
+				case SDL_MOUSEMOTION:
+					SDL_GetMouseState(&_mouse_x, &_mouse_y);
+					break;
+
+				case SDL_MOUSEBUTTONDOWN:
+					_left_mouse_down = b == SDL_BUTTON_LEFT;
+					_right_mouse_down = b == SDL_BUTTON_RIGHT;
+					break;
 
 				default:
 					break;
 				}					
 			}
 		}
+
+		bool mouse_down(MouseButton button)
+		{
+			if (button == LEFT_MOUSE)
+				return _left_mouse_down;
+			else if (button == RIGHT_MOUSE)
+				return _right_mouse_down;
+		}
+
+		int mouse_x()
+		{
+			return _mouse_x;
+		}
+
+		int mouse_y()
+		{
+			return _mouse_y;
+		}
+
 
 		bool key_down(Key key)
 		{

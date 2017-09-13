@@ -78,6 +78,11 @@ int main(int argc, char* argv[])
 		if (key_typed(_9))
 			toggle_music();
 
+		if (input::mouse_down(LEFT_MOUSE))
+		{
+			play_music("jumpshot.mp3");
+		}
+
 
 		if (input::key_typed(RETURN) && console_is_on())
 		{

@@ -158,12 +158,19 @@ namespace deft
 
 	} Key;
 
+	typedef enum 
+	{
+		LEFT_MOUSE = 1,
+		RIGHT_MOUSE = 3
+	} MouseButton;
+
 	namespace input
 	{
 		void get_input();
 		bool key_down(Key key);		
 		bool key_typed(Key key);
 		bool key_released(Key key);
+		bool mouse_down(MouseButton button);
 		std::vector<std::string> get_held_keys();
 	}
 

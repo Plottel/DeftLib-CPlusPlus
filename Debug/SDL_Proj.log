@@ -1,7 +1,4 @@
-﻿  main.cpp
-c:\users\user\desktop\deftlib\main.cpp(51): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(53): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(55): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\user\desktop\deftlib\main.cpp(57): warning C4305: '+=': truncation from 'double' to 'float'
+﻿  input.cpp
+c:\users\user\desktop\deftlib\input.cpp(114): warning C4715: 'deft::input::mouse_down': not all control paths return a value
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

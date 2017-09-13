@@ -13,10 +13,15 @@ namespace deft
 			std::string label;
 			std::string text;
 			Rect rect;
-			Color background_color;
-			Color text_color;
 		} TextBox;
 
-		void draw_textbox(TextBox& text_box);
+		typedef struct
+		{
+			std::string text;
+			Rect rect;
+		} TextButton;
+
+		void draw_text_box(TextBox& text_box);
+		void draw_text_button(TextButton& text_button);
 	}
 }

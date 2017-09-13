@@ -26,7 +26,7 @@ namespace deft
 
 		void init()
 		{
-			console_textbox = graphics::TextBox{ "- CONSOLE -", "", Rect{ 10, 10, 100, 100 }, faded_black, white};
+			console_textbox = graphics::TextBox{ "- CONSOLE -", "", Rect{ 10, 10, 100, 100 }};
 		}
 
 		std::vector<std::string> split_string(std::string& string, const char& splitter)

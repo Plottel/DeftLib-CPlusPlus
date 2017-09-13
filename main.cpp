@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
 	box.rect.y = 200;
 	box.label = "A Textbox";
 	box.text = "Im texting here.";
-	box.background_color = gray;
-	box.text_color = white;
+
+	TextButton button = { "Play Music", Rect{600, 600, 80, 30} };
 
 	while (true)
 	{
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
 #pragma endregion Game Logic
 
 
-
+		
 		//
 		// Rendering
 		//
@@ -108,12 +108,13 @@ int main(int argc, char* argv[])
 			outline_circle(c1, r_clr);
 			outline_circle(c2, r_clr);
 
-			draw_textbox(box);
+			draw_text_box(box);
+			draw_text_button(button);
 
 
 			// Render console
 			if (console_is_on())
-				draw_textbox(console::console_textbox);
+				draw_text_box(console::console_textbox);
 
 		}
 		// Refresh screen

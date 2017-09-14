@@ -57,7 +57,10 @@ namespace deft
 
 			// Reset pressed mouse buttons.
 			for (int i = 0; i < MOUSE_BUTTON_COUNT; ++i)
+			{
 				_pressed_mouse_buttons[i] = false;
+				_released_mouse_buttons[i] = false;
+			}
 
 
 			while (SDL_PollEvent(&e) != 0)

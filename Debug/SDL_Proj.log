@@ -1,4 +1,4 @@
-﻿  input.cpp
+﻿  graphics_ui.cpp
   Generating Code...
   Compiling...
   main.cpp
@@ -6,6 +6,7 @@ c:\users\user\desktop\deftlib\main.cpp(51): warning C4305: '-=': truncation from
 c:\users\user\desktop\deftlib\main.cpp(53): warning C4305: '+=': truncation from 'double' to 'float'
 c:\users\user\desktop\deftlib\main.cpp(55): warning C4305: '-=': truncation from 'double' to 'float'
 c:\users\user\desktop\deftlib\main.cpp(57): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\user\desktop\deftlib\main.cpp(85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   graphics_backend.cpp
 c:\users\user\desktop\deftlib\graphics_backend.cpp(64): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
 c:\users\user\desktop\deftlib\graphics_backend.cpp(84): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
@@ -24,6 +25,11 @@ c:\users\user\desktop\deftlib\graphics_backend.cpp(166): warning C4838: conversi
 c:\users\user\desktop\deftlib\graphics_backend.cpp(166): warning C4244: 'initializing': conversion from 'float' to 'Uint8', possible loss of data
 c:\users\user\desktop\deftlib\graphics_backend.cpp(170): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
 c:\users\user\desktop\deftlib\graphics_backend.cpp(170): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  graphics.cpp
+c:\users\user\desktop\deftlib\graphics.cpp(17): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+c:\users\user\desktop\deftlib\graphics.cpp(17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\graphics.cpp(29): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+c:\users\user\desktop\deftlib\graphics.cpp(29): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   console.cpp
   Generating Code...
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe

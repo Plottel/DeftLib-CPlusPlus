@@ -34,6 +34,16 @@ namespace deft
 				(c1.radius + c2.radius) * (c1.radius + c2.radius);
 		}
 
+		static bool pt_rect_collide(float x, float y, Rect rect)
+		{
+			if (x < rect.x) return false;
+			if (y < rect.y) return false;
+			if (x >= rect.x + rect.w) return false;
+			if (y >= rect.y + rect.h) return false;
+			return true;
+		}
+
+
 		//
 		// Methods with generic Shapes
 		//

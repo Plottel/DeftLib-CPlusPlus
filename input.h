@@ -173,11 +173,11 @@ namespace deft
 		std::vector<std::string> get_held_keys();
 
 
+		int mouse_x();
+		int mouse_y();
 		bool mouse_down(MouseButton button);
 		bool mouse_pressed(MouseButton button);
 		bool mouse_released(MouseButton button);
 
 	}
-
-	// Define Key Codes
 }

@@ -19,6 +19,7 @@ namespace deft
 		{
 			std::string text;
 			Rect rect;
+			bool selected = false;
 		} TextButton;
 
 		void draw_text_box(TextBox& text_box);

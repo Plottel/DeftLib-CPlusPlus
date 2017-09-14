@@ -33,8 +33,16 @@ namespace deft
 		{
 			SDL_Rect button_rect = backend::_be_rect_to_sdl_rect(text_button.rect);
 
-			backend::_be_fill_rect(&button_rect, light_gray);
-			backend::_be_outline_rect(&button_rect, black, 3);
+			if (text_button.selected)
+			{
+				backend::_be_fill_rect(&button_rect, mid_gray);
+				backend::_be_outline_rect(&button_rect, black, 5);
+			}				
+			else
+			{
+				backend::_be_fill_rect(&button_rect, light_gray);
+				backend::_be_outline_rect(&button_rect, black, 3);
+			}			
 
 			if (text_button.text != "")
 				backend::_be_render_text(text_button.text.c_str(), text_button.rect.x + 4, text_button.rect.y + 4, static_cast<Color>(black), backend::font_14);

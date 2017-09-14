@@ -170,8 +170,13 @@ namespace deft
 		bool key_down(Key key);		
 		bool key_typed(Key key);
 		bool key_released(Key key);
-		bool mouse_down(MouseButton button);
 		std::vector<std::string> get_held_keys();
+
+
+		bool mouse_down(MouseButton button);
+		bool mouse_pressed(MouseButton button);
+		bool mouse_released(MouseButton button);
+
 	}
 
 	// Define Key Codes

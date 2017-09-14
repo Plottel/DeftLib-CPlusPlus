@@ -8,20 +8,23 @@
 namespace deft
 {
 	namespace input
-	{
-		const int SDL_KEY_COUNT = 322;
-
-		SDL_Event e;
-		bool _down_keys[SDL_KEY_COUNT];
-		bool _typed_keys[SDL_KEY_COUNT];
-		bool _released_keys[SDL_KEY_COUNT];
-		
+	{		
 		namespace
 		{
+			const int SDL_KEY_COUNT = 322;
+			const int MOUSE_BUTTON_COUNT = 2;
+
+			SDL_Event e;
+			bool _down_keys[SDL_KEY_COUNT];
+			bool _typed_keys[SDL_KEY_COUNT];
+			bool _released_keys[SDL_KEY_COUNT];
+
+			bool _down_mouse_buttons[2] = { false, false };
+			bool _pressed_mouse_buttons[2] = { false, false };
+			bool _released_mouse_buttons[2] = { false, false };
+
 			int _mouse_x = 0;
 			int _mouse_y = 0;
-			bool _left_mouse_down = false;;
-			bool _right_mouse_down = false;;
 		}		
 
 		// Refreshed each frame with new key down and key up events.
@@ -42,8 +45,6 @@ namespace deft
 
 		void get_input()
 		{
-			_left_mouse_down = false;
-			_right_mouse_down = false;
 
 			// Events from last frame no longer relevant.
 			// Typed and released is false for last frame's key events.
@@ -53,6 +54,10 @@ namespace deft
 				_released_keys[key] = false;
 			}				
 			_new_key_events.clear(); // Ready to process new events
+
+			// Reset pressed mouse buttons.
+			for (int i = 0; i < MOUSE_BUTTON_COUNT; ++i)
+				_pressed_mouse_buttons[i] = false;
 
 
 			while (SDL_PollEvent(&e) != 0)
@@ -95,8 +100,29 @@ namespace deft
 					break;
 
 				case SDL_MOUSEBUTTONDOWN:
-					_left_mouse_down = b == SDL_BUTTON_LEFT;
-					_right_mouse_down = b == SDL_BUTTON_RIGHT;
+					if (b == SDL_BUTTON_LEFT)
+					{
+						_pressed_mouse_buttons[0] = true;
+						_down_mouse_buttons[0] = true;
+					}
+					else if (b == SDL_BUTTON_RIGHT)
+					{
+						_pressed_mouse_buttons[1] = true;
+						_down_mouse_buttons[1] = true;
+					}
+					break;
+
+				case SDL_MOUSEBUTTONUP:
+					if (b == SDL_BUTTON_LEFT)
+					{
+						_down_mouse_buttons[0] = false;
+						_released_mouse_buttons[0] = true;
+					}
+					else if (b == SDL_BUTTON_RIGHT)
+					{
+						_down_mouse_buttons[1] = false;
+						_released_mouse_buttons[1] = true;
+					}
 					break;
 
 				default:
@@ -108,20 +134,35 @@ namespace deft
 		bool mouse_down(MouseButton button)
 		{
 			if (button == LEFT_MOUSE)
-				return _left_mouse_down;
+				return _down_mouse_buttons[0];
 			else if (button == RIGHT_MOUSE)
-				return _right_mouse_down;
+				return _down_mouse_buttons[1];
+			return false;
+		}
+
+		bool mouse_pressed(MouseButton button)
+		{
+			if (button == LEFT_MOUSE)
+				return _pressed_mouse_buttons[0];
+			else if (button == RIGHT_MOUSE)
+				return _pressed_mouse_buttons[1];
+			return false;
+		}
+
+		bool mouse_released(MouseButton button)
+		{
+			if (button == LEFT_MOUSE)
+				return _released_mouse_buttons[0];
+			else if (button == RIGHT_MOUSE)
+				return _released_mouse_buttons[1];
+			return false;
 		}
 
 		int mouse_x()
-		{
-			return _mouse_x;
-		}
+			{return _mouse_x;}
 
 		int mouse_y()
-		{
-			return _mouse_y;
-		}
+			{return _mouse_y;}
 
 
 		bool key_down(Key key)

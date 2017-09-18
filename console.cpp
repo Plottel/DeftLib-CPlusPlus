@@ -26,7 +26,11 @@ namespace deft
 
 		void init()
 		{
-			console_textbox = graphics::TextBox{ "- CONSOLE -", "", Rect{ 10, 10, 100, 100 }};
+			console_textbox = graphics::TextBox();
+
+			console_textbox.label = "- CONSOLE -";
+			console_textbox.rect = Rect{ 10, 10, 100, 100 };
+			console_textbox.text = "";
 		}
 
 		std::vector<std::string> split_string(std::string& string, const char& splitter)

@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2_ttf-2.0.14\include;C:\Dev\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\User\Desktop\DeftLib\src;C:\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2_ttf-2.0.14\include;C:\Dev\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Dev\SDL2_image-2.0.1\lib\x86;C:\Dev\SDL2_ttf-2.0.14\lib\x86;C:\Dev\SDL2_mixer-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2_ttf-2.0.14\include;C:\Dev\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\User\Desktop\DeftLib\src;C:\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2_ttf-2.0.14\include;C:\Dev\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Dev\SDL2_image-2.0.1\lib\x86;C:\Dev\SDL2_ttf-2.0.14\lib\x86;C:\Dev\SDL2_mixer-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -23,6 +23,11 @@ namespace deft
 	using deft::Key;
 #endif
 
+	typedef struct
+	{
+		float x, y;
+	} Vec2;
+
 	void init()
 	{
 		graphics::init();

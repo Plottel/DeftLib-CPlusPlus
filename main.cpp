@@ -6,7 +6,6 @@
 using std::vector;
 using namespace deft;
 
-
 int main(int argc, char* argv[])
 {
 	deft::init();
@@ -33,7 +32,17 @@ int main(int argc, char* argv[])
 	box.label = "A Textbox";
 	box.text = "Im texting here.";
 
-	TextButton button = { "Play Music", Rect{600, 600, 80, 30} };
+	//TextButton button = { "Play Music", Rect{600, 600, 80, 30} };
+
+	TextButton button;
+	button.label = "Play Music";
+	button.rect = Rect{ 600, 600, 80, 30 };
+	button.selected = false;
+
+
+	Panel panel = Panel(700, 50, 200, 350);
+	panel.add_textbox("First Textbox", "text for my first textbox");
+	panel.add_text_button("First Text Button");
 
 	while (true)
 	{
@@ -123,6 +132,8 @@ int main(int argc, char* argv[])
 			// Render console
 			if (console_is_on())
 				draw_text_box(console::console_textbox);
+
+			panel.render();
 
 		}
 		// Refresh screen

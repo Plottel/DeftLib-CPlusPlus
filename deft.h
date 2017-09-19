@@ -8,6 +8,7 @@
 #include "geometry.h"
 #include <algorithm>
 #include <cctype>
+#include "graphics_ui.h"
 
 #define DEFT_SHORTHAND
 
@@ -33,6 +34,22 @@ namespace deft
 		graphics::init();
 		audio::init();
 		console::init();
+	}
+
+	void process_events()
+	{
+		input::get_input();
+		console::update_console();
+
+		if (input::mouse_released(LEFT_MOUSE))
+			graphics::backend::_be_on_left_mouse_release(input::mouse_x(), input::mouse_y());
+
+		if (input::mouse_pressed(LEFT_MOUSE))
+
+
+
+		if (input::key_typed(O))
+			console::toggle_console();
 	}
 
 	void quit()

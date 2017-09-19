@@ -3,7 +3,6 @@
 #include <iostream>
 #include "geometry.h"
 
-
 namespace deft
 {
 	namespace graphics

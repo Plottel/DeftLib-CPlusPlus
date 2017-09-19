@@ -2,6 +2,7 @@
 #include "deft.h"
 #include <ctype.h>
 #include <vector>
+#include "panel_types.h"
 
 using std::vector;
 
@@ -14,9 +15,19 @@ int main(int argc, char* argv[])
 	deft::load_sound("hit_3.wav");
 	deft::load_music("jumpshot.mp3");
 
+	deft::Rect rect = deft::Rect{ 100, 600, 50, 50 };
+
 	// Allocate panels
 	deft::MusicPlayerPanel* music = new deft::MusicPlayerPanel("Music Player", 50, 50, 200, 400);
+	deft::RectEditPanel* rect_edit = new deft::RectEditPanel("Rect Editor", 400, 50, 200, 400);
+	rect_edit->set_edit_rect(&rect);
+
+
+
 	deft::add_panel(music);
+	deft::add_panel(rect_edit);
+
+
 
 	while (true)
 	{

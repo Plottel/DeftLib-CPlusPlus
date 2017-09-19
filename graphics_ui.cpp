@@ -2,6 +2,7 @@
 #include "graphics_backend.h"
 #include "geometry.h"
 #include "audio.h"
+#include <math.h>
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ namespace deft
 
 			for (auto& gadget : gadgets_)
 				gadget->render();
+
 		}
 
 		namespace backend
@@ -37,6 +39,19 @@ namespace deft
 				}
 			}
 
+			void _be_on_left_mouse_press(int mouse_x, int mouse_y)
+			{
+				// Handle input for the clicked on panel, if any.
+				for (auto& panel : _be_panels)
+				{
+					if (geometry::pt_rect_collide(mouse_x, mouse_y, panel->rect))
+					{
+						panel->on_left_mouse_press(mouse_x, mouse_y);
+						return;
+					}
+				}
+			}
+
 			void _be_render_gui()
 			{
 				for (auto& panel : _be_panels)
@@ -51,64 +66,44 @@ namespace deft
 
 		std::string Panel::clicked()
 		{
-			if (active_gadget_ == nullptr)
-				return "";
-			return active_gadget_->name;
+			for (auto& gadget : gadgets_)
+			{
+				if (gadget->selected)
+					return gadget->name;
+			}
+
+			return "";
 		}
 
 		void Panel::on_left_mouse_release(int mouse_x, int mouse_y)
 		{
-			if (active_gadget_)
-			{
-				active_gadget_->on_left_mouse_release(mouse_x, mouse_y);
-				// Mouse not on any active gadget.
-				active_gadget_ = nullptr;
-			}
-		}
-
-		void Panel::on_left_mouse_press(int mouse_x, int mouse_y)
-		{
-			// Reset active gadget
-			active_gadget_ = nullptr;
-
 			for (auto& gadget : gadgets_)
 			{
-				if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget->rect))
+				if (gadget->selected)
 				{
-					active_gadget_ = gadget;
+					gadget->selected = false;
+					gadget->on_left_mouse_release(mouse_x, mouse_y);
 					return;
 				}
 			}
 		}
 
-		MusicPlayerPanel::MusicPlayerPanel(std::string panel_name, float x, float y, int w, int h)
-			: Panel(panel_name, x, y, w, h)
+		void Panel::on_left_mouse_press(int mouse_x, int mouse_y)
 		{
-			add_text_button("Play Music");
-			add_text_button("Pause Music");
-			add_text_button("Resume Music");
-			add_text_button("Stop Music");
-			add_text_button("Toggle Music");
-		}
-
-		void MusicPlayerPanel::on_left_mouse_release(int mouse_x, int mouse_y)
-		{
-			Panel::on_left_mouse_release(mouse_x, mouse_y);
-
-			if (clicked() == "Play Music")
-				audio::play_music("jumpshot.mp3");
-			if (clicked() == "Pause Music")
-				audio::pause_music();
-			if (clicked() == "Resume Music")
-				audio::resume_music();
-			if (clicked() == "Stop Music")
-				audio::stop_music();
-			if (clicked() == "Toggle Music")
-				audio::toggle_music();				
-		}
+			for (auto& gadget : gadgets_)
+			{
+				if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget->rect))
+				{
+					gadget->selected = true;
+					gadget->on_left_mouse_press(mouse_x, mouse_y);
+					return;
+				}
+			}
+		}		
 
 		const int TEXTBOX_HEIGHT = 100;
 		const int TEXT_BUTTON_HEIGHT = 40;
+		const int INT_SLIDER_HEIGHT = 20;
 		const int PANEL_PADDING = 10;
 
 		void add_panel(Panel* panel)
@@ -130,11 +125,22 @@ namespace deft
 			backend::_be_outline_rect(&label_rect, black, 3);
 			backend::_be_outline_rect(&box_rect, black, 3);
 
+			if (selected)
+				render_selected();
+
 			if (name != "")
 				backend::_be_render_text(name.c_str(), rect.x + 7, rect.y + 7, static_cast<Color>(black), backend::font_16);
 
 			if (text != "")
 				backend::_be_render_text(text.c_str(), rect.x + 7, rect.y + TEXTBOX_LABEL_HEIGHT, static_cast<Color>(black), backend::font_12);
+		}
+
+		void TextBox::render_selected()
+		{
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+
+			backend::_be_fill_rect(&box_rect, dark_gray);
+			backend::_be_outline_rect(&box_rect, light_gray, 3);
 		}
 
 		void TextButton::render()
@@ -143,8 +149,7 @@ namespace deft
 
 			if (selected)
 			{
-				backend::_be_fill_rect(&button_rect, mid_gray);
-				backend::_be_outline_rect(&button_rect, black, 5);
+				render_selected();
 			}
 			else
 			{
@@ -154,6 +159,14 @@ namespace deft
 
 			if (name != "")
 				backend::_be_render_text(name.c_str(), rect.x + 4, rect.y + 4, static_cast<Color>(black), backend::font_14);
+		}
+
+		void TextButton::render_selected()
+		{
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+
+			backend::_be_fill_rect(&box_rect, dark_gray);
+			backend::_be_outline_rect(&box_rect, light_gray, 3);
 		}
 
 		Panel::Panel(std::string panel_name, float x, float y, int w, int h)
@@ -237,50 +250,105 @@ namespace deft
 					rect.w - (PANEL_PADDING * 2),
 					TEXT_BUTTON_HEIGHT
 				};
-			}			
+			}
 
 			gadgets_.push_back(button);
 		}
 
-		void draw_text_box(TextBox& textbox)
+		void Panel::add_int_slider(std::string label, int* var)
 		{
-			int TEXTBOX_LABEL_HEIGHT = 25;
+			IntSlider* slider = new IntSlider();
 
-			// Textbox area.
-			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(textbox.rect);
-			// Area for label (top of textbox)
-			SDL_Rect label_rect = SDL_Rect{ (int)textbox.rect.x, (int)textbox.rect.y, textbox.rect.w, TEXTBOX_LABEL_HEIGHT };
+			slider->name = label;
 
-			// Fill border and colour label area on top
-			backend::_be_fill_rect(&box_rect, light_gray);
-			backend::_be_outline_rect(&label_rect, black, 3);
-			backend::_be_outline_rect(&box_rect, black, 3);
-
-			if (textbox.name != "")
-				backend::_be_render_text(textbox.name.c_str(), textbox.rect.x + 7, textbox.rect.y + 7, static_cast<Color>(black), backend::font_16);
-
-			if (textbox.text != "")
-				backend::_be_render_text(textbox.text.c_str(), textbox.rect.x + 7, textbox.rect.y + TEXTBOX_LABEL_HEIGHT, static_cast<Color>(black), backend::font_12);
-
-		}
-
-		void draw_text_button(TextButton& text_button)
-		{
-			SDL_Rect button_rect = backend::_be_rect_to_sdl_rect(text_button.rect);
-
-			if (text_button.selected)
+			// If first element, position top left corner
+			if (gadgets_.size() == 0)
 			{
-				backend::_be_fill_rect(&button_rect, mid_gray);
-				backend::_be_outline_rect(&button_rect, black, 5);
-			}				
+				slider->rect = Rect
+				{
+					rect.x + PANEL_PADDING,
+					rect.y + PANEL_PADDING,
+					rect.w - (PANEL_PADDING * 2),
+					INT_SLIDER_HEIGHT
+
+				};
+			}
 			else
 			{
-				backend::_be_fill_rect(&button_rect, light_gray);
-				backend::_be_outline_rect(&button_rect, black, 3);
-			}			
+				Gadget* last_gadget = gadgets_[gadgets_.size() - 1];
 
-			if (text_button.name != "")
-				backend::_be_render_text(text_button.name.c_str(), text_button.rect.x + 4, text_button.rect.y + 4, static_cast<Color>(black), backend::font_14);
+				slider->rect = Rect
+				{
+					rect.x + PANEL_PADDING,
+					last_gadget->rect.y + last_gadget->rect.h + PANEL_PADDING,
+					rect.w - (PANEL_PADDING * 2),
+					INT_SLIDER_HEIGHT
+				};
+			}
+
+			gadgets_.push_back(slider);
+		}
+
+		void IntSlider::set_var(int& var, int min, int max)
+		{
+			this->var = &var;
+			this->min = min;
+			this->max = max;
+
+			slider.w = 8;
+			slider.w = 15;
+		}
+
+		void IntSlider::on_left_mouse_press(int mouse_x, int mouse_y)
+		{
+			if (geometry::pt_rect_collide(mouse_x, mouse_y, slider))
+			{
+				slider.x = mouse_x - (slider.w / 2);
+				// Horizontal slider, Y does not change.
+				selected = true;
+			}
+		}
+
+		void IntSlider::on_left_mouse_release(int mouse_x, int mouse_y)
+		{
+			if (selected)
+			{
+				slider.x = mouse_x - (slider.w / 2);
+				selected = false;
+
+				float val_per_pixel = rect.w / fabs(min - max);
+
+				if (mouse_x < rect.x)
+					*var = min;
+				else if (mouse_x > rect.x + rect.w)
+					*var = max;
+				else
+					*var = min + ((mouse_x - rect.x) * val_per_pixel);
+			}
+		}
+
+		void IntSlider::render()
+		{
+			if (selected)
+				render_selected();
+			else
+			{
+				SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+				SDL_Rect slider_rect = backend::_be_rect_to_sdl_rect(slider);
+
+				backend::_be_fill_rect(&box_rect, light_gray);
+				backend::_be_outline_rect(&box_rect, black, 3);
+				backend::_be_fill_rect(&slider_rect, gray);
+			}
+		}
+
+		void IntSlider::render_selected()
+		{
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+			SDL_Rect slider_rect = backend::_be_rect_to_sdl_rect(slider);
+			backend::_be_fill_rect(&box_rect, light_gray);
+			backend::_be_outline_rect(&box_rect, black, 3);
+			backend::_be_fill_rect(&slider_rect, black);
 		}
 	}
 }

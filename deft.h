@@ -45,7 +45,7 @@ namespace deft
 			graphics::backend::_be_on_left_mouse_release(input::mouse_x(), input::mouse_y());
 
 		if (input::mouse_pressed(LEFT_MOUSE))
-
+			graphics::backend::_be_on_left_mouse_press(input::mouse_x(), input::mouse_y());
 
 
 		if (input::key_typed(O))

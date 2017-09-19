@@ -162,7 +162,7 @@ namespace deft
 
 			void _be_render_text(const char* text, float x, float y, Color& clr, Font* font)
 			{
-				SDL_Color sdl_clr = { clr.r, clr.g, clr.b, clr.a };
+				SDL_Color sdl_clr = { clr.r, clr.g, clr.b, clr.a};
 
 				SDL_Surface* text_surface = TTF_RenderText_Solid(font, text, sdl_clr);
 				SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);

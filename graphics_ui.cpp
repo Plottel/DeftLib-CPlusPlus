@@ -5,6 +5,7 @@
 #include <math.h>
 
 #include <iostream>
+#include <stdlib.h>
 
 namespace deft
 {
@@ -81,8 +82,8 @@ namespace deft
 			{
 				if (gadget->selected)
 				{
-					gadget->selected = false;
 					gadget->on_left_mouse_release(mouse_x, mouse_y);
+					gadget->selected = false;
 					return;
 				}
 			}
@@ -266,11 +267,10 @@ namespace deft
 			{
 				slider->rect = Rect
 				{
-					rect.x + PANEL_PADDING,
+					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
 					rect.y + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					IntSlider::SLIDER_BAR_W,
 					INT_SLIDER_HEIGHT
-
 				};
 			}
 			else
@@ -279,12 +279,17 @@ namespace deft
 
 				slider->rect = Rect
 				{
-					rect.x + PANEL_PADDING,
+					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
 					last_gadget->rect.y + last_gadget->rect.h + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					IntSlider::SLIDER_BAR_W,
 					INT_SLIDER_HEIGHT
 				};
 			}
+
+			slider->slider.w = IntSlider::SLIDER_MARKER_W;
+			slider->slider.h = IntSlider::SLIDER_MARKER_H;
+			slider->slider.y = (slider->rect.y + (slider->rect.h / 2)) - (slider->slider.h / 2); // Middle of IntSlider rect
+			slider->slider.x = slider->rect.x + IntSlider::LABEL_PADDING;
 
 			gadgets_.push_back(slider);
 		}
@@ -294,9 +299,6 @@ namespace deft
 			this->var = &var;
 			this->min = min;
 			this->max = max;
-
-			slider.w = 8;
-			slider.w = 15;
 		}
 
 		void IntSlider::on_left_mouse_press(int mouse_x, int mouse_y)
@@ -305,26 +307,53 @@ namespace deft
 			{
 				slider.x = mouse_x - (slider.w / 2);
 				// Horizontal slider, Y does not change.
+
+				if (slider.x < rect.x)
+					slider.x = rect.x;
+				else if (slider.x + slider.w > rect.x + rect.w)
+					slider.x = rect.x + rect.w;
+
 				selected = true;
 			}
 		}
 
 		void IntSlider::on_left_mouse_release(int mouse_x, int mouse_y)
 		{
-			if (selected)
+			slider.x = mouse_x - (slider.w / 2);
+
+			if (selected && var != nullptr)
 			{
-				slider.x = mouse_x - (slider.w / 2);
-				selected = false;
 
 				float val_per_pixel = rect.w / fabs(min - max);
 
-				if (mouse_x < rect.x)
+				if (slider.x < rect.x)
+				{
 					*var = min;
-				else if (mouse_x > rect.x + rect.w)
+					slider.x = rect.x + 10;
+				}
+				else if (slider.x + slider.w > rect.x + rect.w)
+				{
 					*var = max;
+					slider.x = rect.x + rect.w - ((slider.w / 2) + 10);
+				}
 				else
+				{
+					// start = slider.x;
+					// end = slider.x + slider.w;
+					// distance for 100% = slider.w;
+					// actual distance = slider_bar.x - slider.x
+
+					// pcnt_done = actual_dist / max_dist
+
+
+					// pcnt_done = 
+					// value = max * pcnt_done;
 					*var = min + ((mouse_x - rect.x) * val_per_pixel);
+					slider.x = mouse_x - (slider.w / 2);
+				}
 			}
+
+			selected = false;
 		}
 
 		void IntSlider::render()
@@ -338,8 +367,13 @@ namespace deft
 
 				backend::_be_fill_rect(&box_rect, light_gray);
 				backend::_be_outline_rect(&box_rect, black, 3);
-				backend::_be_fill_rect(&slider_rect, gray);
+				backend::_be_fill_rect(&slider_rect, blue);
 			}
+
+			backend::_be_render_text(name.c_str(), rect.x - IntSlider::LABEL_PADDING + 5, rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+
+			if (var != nullptr)
+				backend::_be_render_text(std::to_string(*var).c_str(), rect.x + IntSlider::SLIDER_BAR_W + 5, rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
 		}
 
 		void IntSlider::render_selected()
@@ -348,7 +382,7 @@ namespace deft
 			SDL_Rect slider_rect = backend::_be_rect_to_sdl_rect(slider);
 			backend::_be_fill_rect(&box_rect, light_gray);
 			backend::_be_outline_rect(&box_rect, black, 3);
-			backend::_be_fill_rect(&slider_rect, black);
+			backend::_be_fill_rect(&slider_rect, white);
 		}
 	}
 }

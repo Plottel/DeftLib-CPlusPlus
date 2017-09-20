@@ -78,10 +78,18 @@ namespace deft
 			virtual void render_selected();
 		} TextButton;
 
+
 		typedef struct IntSlider : Gadget
 		{
+			static const int SLIDER_BAR_W = 80;
+			static const int SLIDER_BAR_H = 20;
+			static const int SLIDER_MARKER_W = 3;
+			static const int SLIDER_MARKER_H = 15;
+			static const int LABEL_PADDING = 50;
+
 			int* var;
 			int min, max;
+			deft::Rect slider;
 
 			void set_var(int& value, int min, int max);
 
@@ -90,7 +98,6 @@ namespace deft
 			virtual void render();
 
 		private:
-			deft::Rect slider;
 			virtual void render_selected();
 		} IntSlider;
 

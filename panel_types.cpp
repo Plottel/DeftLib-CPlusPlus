@@ -51,8 +51,12 @@ namespace deft
 		void RectEditPanel::set_edit_rect(deft::Rect* edit_rect)
 		{
 			var = edit_rect;
-			get_gadget<IntSlider>("W")->set_var(var->w, 1, 100);
-			get_gadget<IntSlider>("H")->set_var(var->h, 1, 100);
+			get_gadget<IntSlider>("W")->set_var(edit_rect->w, 1, 100);
+			get_gadget<IntSlider>("H")->set_var(edit_rect->h, 1, 100);
+
+
+			get_gadget<IntSlider>("X")->set_var((int&)edit_rect->x, 1, 1000);
+			get_gadget<IntSlider>("Y")->set_var((int&)edit_rect->y, 1, 800);
 		}
 	}
 }

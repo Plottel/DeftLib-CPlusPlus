@@ -1,11 +1,3 @@
-﻿  graphics_ui.cpp
-c:\users\user\desktop\deftlib\graphics_ui.cpp(34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(304): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(306): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(316): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(319): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\user\desktop\deftlib\graphics_ui.cpp(326): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+﻿  panel_types.cpp
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.exe
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

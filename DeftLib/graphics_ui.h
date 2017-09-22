@@ -12,7 +12,8 @@ namespace deft
 		typedef struct Gadget
 		{
 			std::string name;
-			Rect rect;
+			Rect gadget_rect;
+			Rect val_rect;
 
 			bool selected = false;
 
@@ -26,7 +27,7 @@ namespace deft
 
 		typedef struct Panel
 		{
-			Panel(std::string panel_name, float x, float y, int w, int h);
+			Panel(std::string panel_name, int x, int y, int w, int h);
 			~Panel();
 
 			std::string name;
@@ -82,16 +83,17 @@ namespace deft
 		typedef struct IntSlider : Gadget
 		{
 			static const int SLIDER_BAR_W = 80;
-			static const int SLIDER_BAR_H = 20;
+			static const int SLIDER_BAR_H = 3;
 			static const int SLIDER_MARKER_W = 3;
-			static const int SLIDER_MARKER_H = 15;
+			static const int SLIDER_MARKER_H = 10;
 			static const int LABEL_PADDING = 50;
 
-			int* var;
+			int* val;
 			int min, max;
-			deft::Rect slider;
+			deft::Rect slider_bar;
+			deft::Rect val_marker;
 
-			void set_var(int& value, int min, int max);
+			void set_val(int& value, int min, int max);
 
 			virtual void on_left_mouse_press(int mouse_x, int mouse_y);
 			virtual void on_left_mouse_release(int mouse_x, int mouse_y);
@@ -99,6 +101,8 @@ namespace deft
 
 		private:
 			virtual void render_selected();
+			void clamp_val_marker();
+			void update_val();
 		} IntSlider;
 
 
@@ -108,7 +112,7 @@ namespace deft
 			void _be_on_left_mouse_press(int mouse_x, int mouse_y);
 		}
 
-		void add_panel(Panel* panel);
+		void add_panel(std::unique_ptr<Panel> panel);
 
 		void render_gui();
 	}

@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <vector>
 #include "panel_types.h"
+#include <memory>
 
 using std::vector;
 
@@ -17,12 +18,16 @@ int main(int argc, char* argv[])
 
 	deft::Rect rect = deft::Rect{ 100, 600, 50, 50 };
 
+
 	// Allocate panels
-	deft::MusicPlayerPanel* music = new deft::MusicPlayerPanel("Music Player", 50, 50, 200, 400);
-	deft::RectEditPanel* rect_edit = new deft::RectEditPanel("Rect Editor", 400, 50, 200, 400);
+	deft::RectEditPanel* rect_edit = new deft::RectEditPanel("Rect Editor", 5, 5);
 	rect_edit->set_edit_rect(&rect);
 
-	deft::add_panel(music);
+	auto asd = std::make_unique<deft::MusicPlayerPanel>("Music Player", 1000, 100);
+
+	deft::add_panel(std::make_unique<deft::Panel>("Music Player", 300, 5));
+	//deft::add_panel(asd);
+
 	deft::add_panel(rect_edit);
 
 	while (true)
@@ -55,6 +60,8 @@ int main(int argc, char* argv[])
 		// Clear screen
 		deft::pre_render();
 		{
+			deft::fill_rect(rect, deft::blue);
+
 			// Render deft GUI
 			deft::render_gui();
 		}
@@ -63,7 +70,8 @@ int main(int argc, char* argv[])
 	}
 
 	// Deallocate panels
-	delete music;
+	//delete music;
+	delete rect_edit;
 
 	return EXIT_SUCCESS;
 }

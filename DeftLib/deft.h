@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cctype>
 #include "graphics_ui.h"
+#include "ecs.h"
 
 #define DEFT_SHORTHAND
 
@@ -23,11 +24,6 @@ namespace deft
 	using namespace geometry;
 	using deft::Key;
 #endif
-
-	typedef struct
-	{
-		float x, y;
-	} Vec2;
 
 	void init()
 	{
@@ -44,12 +40,17 @@ namespace deft
 		if (input::mouse_released(LEFT_MOUSE))
 			graphics::backend::_be_on_left_mouse_release(input::mouse_x(), input::mouse_y());
 
-		if (input::mouse_pressed(LEFT_MOUSE))
+		if (input::mouse_down(LEFT_MOUSE)) // NOTE: mouse_down ATM
 			graphics::backend::_be_on_left_mouse_press(input::mouse_x(), input::mouse_y());
 
 
 		if (input::key_typed(O))
 			console::toggle_console();
+	}
+
+	void process_systems()
+	{
+		ecs::process();
 	}
 
 	void quit()

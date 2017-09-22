@@ -29,7 +29,7 @@ namespace deft
 			console_textbox = graphics::TextBox();
 
 			console_textbox.name = "- CONSOLE -";
-			console_textbox.rect = Rect{ 10, 10, 100, 100 };
+			console_textbox.gadget_rect = Rect{ 10, 10, 100, 100 };
 			console_textbox.text = "";
 		}
 

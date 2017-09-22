@@ -7,7 +7,7 @@ namespace deft
 {
 	namespace graphics
 	{
-		MusicPlayerPanel::MusicPlayerPanel(std::string panel_name, float x, float y, int w, int h)
+		MusicPlayerPanel::MusicPlayerPanel(std::string panel_name, int x, int y, int w, int h)
 			: Panel(panel_name, x, y, w, h)
 		{
 			add_text_button("Play Music");
@@ -34,7 +34,7 @@ namespace deft
 			Panel::on_left_mouse_release(mouse_x, mouse_y);
 		}
 
-		RectEditPanel::RectEditPanel(std::string panel_name, float x, float y, int w, int h)
+		RectEditPanel::RectEditPanel(std::string panel_name, int x, int y, int w, int h)
 			: Panel(panel_name, x, y, w, h)
 		{
 			add_int_slider("X", nullptr);
@@ -51,12 +51,11 @@ namespace deft
 		void RectEditPanel::set_edit_rect(deft::Rect* edit_rect)
 		{
 			var = edit_rect;
-			get_gadget<IntSlider>("W")->set_var(edit_rect->w, 1, 100);
-			get_gadget<IntSlider>("H")->set_var(edit_rect->h, 1, 100);
+			get_gadget<IntSlider>("W")->set_val(edit_rect->w, 1, 300);
+			get_gadget<IntSlider>("H")->set_val(edit_rect->h, 1, 300);
 
-
-			get_gadget<IntSlider>("X")->set_var((int&)edit_rect->x, 1, 1000);
-			get_gadget<IntSlider>("Y")->set_var((int&)edit_rect->y, 1, 800);
+			get_gadget<IntSlider>("X")->set_val((int&)edit_rect->x, 1, 900);
+			get_gadget<IntSlider>("Y")->set_val((int&)edit_rect->y, 1, 900);
 		}
 	}
 }

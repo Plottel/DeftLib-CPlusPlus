@@ -6,7 +6,7 @@ namespace deft
 {
 	typedef struct
 	{
-		float x, y;
+		int x, y;
 		int w, h;
 	} Rect;
 
@@ -15,6 +15,16 @@ namespace deft
 		float x, y;
 		int radius;
 	} Circle;
+
+	typedef struct
+	{
+		float x, y;
+
+
+	} Vec2;
+
+	typedef Vec2 Size2;
+	typedef Vec2 Pt2;
 
 	namespace geometry
 	{

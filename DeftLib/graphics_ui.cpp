@@ -3,9 +3,12 @@
 #include "geometry.h"
 #include "audio.h"
 #include <math.h>
+#include <iomanip>
+#include <sstream>
 
 #include <iostream>
 #include <stdlib.h>
+#include <memory>
 
 namespace deft
 {
@@ -25,7 +28,7 @@ namespace deft
 
 		namespace backend
 		{
-			std::vector<Panel*> _be_panels;
+			std::vector<std::unique_ptr<Panel>> _be_panels;
 
 			void _be_on_left_mouse_release(int mouse_x, int mouse_y)
 			{
@@ -93,7 +96,7 @@ namespace deft
 		{
 			for (auto& gadget : gadgets_)
 			{
-				if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget->rect))
+				if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget->gadget_rect))
 				{
 					gadget->selected = true;
 					gadget->on_left_mouse_press(mouse_x, mouse_y);
@@ -107,19 +110,14 @@ namespace deft
 		const int INT_SLIDER_HEIGHT = 20;
 		const int PANEL_PADDING = 10;
 
-		void add_panel(Panel* panel)
-		{
-			backend::_be_panels.push_back(panel);
-		}
-
 		void TextBox::render()
 		{
 			int TEXTBOX_LABEL_HEIGHT = 25;
 
 			// Textbox area.
-			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(gadget_rect);
 			// Area for label (top of textbox)
-			SDL_Rect label_rect = SDL_Rect{ (int)rect.x, (int)rect.y, rect.w, TEXTBOX_LABEL_HEIGHT };
+			SDL_Rect label_rect = SDL_Rect{ (int)gadget_rect.x, (int)gadget_rect.y, gadget_rect.w, TEXTBOX_LABEL_HEIGHT };
 
 			// Fill border and colour label area on top
 			backend::_be_fill_rect(&box_rect, light_gray);
@@ -130,15 +128,15 @@ namespace deft
 				render_selected();
 
 			if (name != "")
-				backend::_be_render_text(name.c_str(), rect.x + 7, rect.y + 7, static_cast<Color>(black), backend::font_16);
+				backend::_be_render_text(name.c_str(), gadget_rect.x + 7, gadget_rect.y + 7, static_cast<Color>(black), backend::font_16);
 
 			if (text != "")
-				backend::_be_render_text(text.c_str(), rect.x + 7, rect.y + TEXTBOX_LABEL_HEIGHT, static_cast<Color>(black), backend::font_12);
+				backend::_be_render_text(text.c_str(), gadget_rect.x + 7, gadget_rect.y + TEXTBOX_LABEL_HEIGHT, static_cast<Color>(black), backend::font_12);
 		}
 
 		void TextBox::render_selected()
 		{
-			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(gadget_rect);
 
 			backend::_be_fill_rect(&box_rect, dark_gray);
 			backend::_be_outline_rect(&box_rect, light_gray, 3);
@@ -146,7 +144,7 @@ namespace deft
 
 		void TextButton::render()
 		{
-			SDL_Rect button_rect = backend::_be_rect_to_sdl_rect(rect);
+			SDL_Rect button_rect = backend::_be_rect_to_sdl_rect(gadget_rect);
 
 			if (selected)
 			{
@@ -159,18 +157,22 @@ namespace deft
 			}
 
 			if (name != "")
-				backend::_be_render_text(name.c_str(), rect.x + 4, rect.y + 4, static_cast<Color>(black), backend::font_14);
+				backend::_be_render_text(name.c_str(), gadget_rect.x + 4, gadget_rect.y + 4, static_cast<Color>(black), backend::font_14);
 		}
 
 		void TextButton::render_selected()
 		{
-			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
+			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(gadget_rect);
 
 			backend::_be_fill_rect(&box_rect, dark_gray);
 			backend::_be_outline_rect(&box_rect, light_gray, 3);
 		}
 
-		Panel::Panel(std::string panel_name, float x, float y, int w, int h)
+		void add_panel(std::unique_ptr<Panel> panel)
+		{
+		}
+
+		Panel::Panel(std::string panel_name, int x, int y, int w, int h)
 		{
 			name = panel_name;
 			rect = Rect{ x, y, w, h };
@@ -192,7 +194,7 @@ namespace deft
 			// If first element, position top left corner.
 			if (gadgets_.empty())
 			{
-				box->rect = Rect
+				box->gadget_rect = Rect
 				{
 					rect.x + PANEL_PADDING,
 					rect.y + PANEL_PADDING,
@@ -204,10 +206,10 @@ namespace deft
 			{
 				Gadget* last_gadget = gadgets_[gadgets_.size() - 1];
 
-				box->rect = Rect
+				box->gadget_rect = Rect
 				{
 					rect.x + PANEL_PADDING,
-					last_gadget->rect.y + last_gadget->rect.h + PANEL_PADDING,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
 					rect.w - (PANEL_PADDING * 2),
 					TEXTBOX_HEIGHT
 				};
@@ -232,7 +234,7 @@ namespace deft
 			// If first element, position top left corner
 			if (gadgets_.size() == 0)
 			{
-				button->rect = Rect
+				button->gadget_rect = Rect
 				{
 					rect.x + PANEL_PADDING,
 					rect.y + PANEL_PADDING,
@@ -244,10 +246,10 @@ namespace deft
 			{
 				Gadget* last_gadget = gadgets_[gadgets_.size() - 1];
 
-				button->rect = Rect
+				button->gadget_rect = Rect
 				{
 					rect.x + PANEL_PADDING,
-					last_gadget->rect.y + last_gadget->rect.h + PANEL_PADDING,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
 					rect.w - (PANEL_PADDING * 2),
 					TEXT_BUTTON_HEIGHT
 				};
@@ -258,99 +260,115 @@ namespace deft
 
 		void Panel::add_int_slider(std::string label, int* var)
 		{
-			IntSlider* slider = new IntSlider();
+			IntSlider* gadget = new IntSlider();
 
-			slider->name = label;
+			gadget->name = label;
 
 			// If first element, position top left corner
 			if (gadgets_.size() == 0)
 			{
-				slider->rect = Rect
+				gadget->slider_bar = Rect
 				{
 					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
-					rect.y + PANEL_PADDING,
+					rect.y + PANEL_PADDING + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
 					IntSlider::SLIDER_BAR_W,
+					IntSlider::SLIDER_BAR_H
+				};
+
+				gadget->gadget_rect = Rect
+				{
+					rect.x + PANEL_PADDING,
+					rect.y + PANEL_PADDING,
+					rect.w - (PANEL_PADDING * 2),
 					INT_SLIDER_HEIGHT
 				};
 			}
-			else
+			else // If elements exist, position below bottom element
 			{
 				Gadget* last_gadget = gadgets_[gadgets_.size() - 1];
 
-				slider->rect = Rect
+				gadget->slider_bar = Rect
 				{
 					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
-					last_gadget->rect.y + last_gadget->rect.h + PANEL_PADDING,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
 					IntSlider::SLIDER_BAR_W,
+					IntSlider::SLIDER_BAR_H
+				};
+
+				gadget->gadget_rect = Rect
+				{
+					rect.x + PANEL_PADDING,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
+					rect.w - (PANEL_PADDING * 2),
 					INT_SLIDER_HEIGHT
 				};
 			}
 
-			slider->slider.w = IntSlider::SLIDER_MARKER_W;
-			slider->slider.h = IntSlider::SLIDER_MARKER_H;
-			slider->slider.y = (slider->rect.y + (slider->rect.h / 2)) - (slider->slider.h / 2); // Middle of IntSlider rect
-			slider->slider.x = slider->rect.x + IntSlider::LABEL_PADDING;
+			gadget->val_marker.w = IntSlider::SLIDER_MARKER_W;
+			gadget->val_marker.h = IntSlider::SLIDER_MARKER_H;
+			gadget->val_marker.y = (gadget->gadget_rect.y + (gadget->gadget_rect.h / 2)) - (gadget->val_marker.h / 2); // Middle of IntSlider rect
+			gadget->val_marker.x = gadget->gadget_rect.x + IntSlider::LABEL_PADDING;
 
-			gadgets_.push_back(slider);
+			gadgets_.push_back(gadget);
 		}
 
-		void IntSlider::set_var(int& var, int min, int max)
+		void IntSlider::set_val(int& var, int min, int max)
 		{
-			this->var = &var;
+			this->val = &var;
 			this->min = min;
 			this->max = max;
 		}
 
-		void IntSlider::on_left_mouse_press(int mouse_x, int mouse_y)
+		void IntSlider::clamp_val_marker()
 		{
-			if (geometry::pt_rect_collide(mouse_x, mouse_y, slider))
+			if (val_marker.x < slider_bar.x)
+				val_marker.x = slider_bar.x;
+			else if (val_marker.x + val_marker.w > slider_bar.x + slider_bar.w)
+				val_marker.x = slider_bar.x + slider_bar.w - val_marker.w;
+		}
+
+		void IntSlider::update_val()
+		{
+			//    percentHealth = (currentHealth / maxHealth) * 100; //get's health percentage.
+
+			//float val_per_pixel = slider_bar.w / fabs(min - max);
+
+			if (val_marker.x <= slider_bar.x)
+				*val = min;
+			else if (val_marker.x + val_marker.w >= slider_bar.x + slider_bar.w)
+				*val = max;
+			else
 			{
-				slider.x = mouse_x - (slider.w / 2);
-				// Horizontal slider, Y does not change.
+				int max_dist = slider_bar.w;
+				int cur_dist = val_marker.x - slider_bar.x;
 
-				if (slider.x < rect.x)
-					slider.x = rect.x;
-				else if (slider.x + slider.w > rect.x + rect.w)
-					slider.x = rect.x + rect.w;
-
-				selected = true;
+				*val = max * ((float)((float)cur_dist / (float)max_dist));
+			
+				//*val = min + ((val_marker.x - slider_bar.x) * val_per_pixel);
 			}
 		}
 
+		void IntSlider::on_left_mouse_press(int mouse_x, int mouse_y)
+		{
+			if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget_rect))
+			{
+				selected = true;
+				val_marker.x = mouse_x - (val_marker.w / 2);	// Horizontal slider, Y does not change.
+				clamp_val_marker();
+
+				if (val != nullptr)
+					update_val();
+			}
+		}		
+
 		void IntSlider::on_left_mouse_release(int mouse_x, int mouse_y)
 		{
-			slider.x = mouse_x - (slider.w / 2);
+			val_marker.x = mouse_x - (val_marker.w / 2);
 
-			if (selected && var != nullptr)
+			if (selected && val != nullptr)
 			{
-
-				float val_per_pixel = rect.w / fabs(min - max);
-
-				if (slider.x < rect.x)
-				{
-					*var = min;
-					slider.x = rect.x + 10;
-				}
-				else if (slider.x + slider.w > rect.x + rect.w)
-				{
-					*var = max;
-					slider.x = rect.x + rect.w - ((slider.w / 2) + 10);
-				}
-				else
-				{
-					// start = slider.x;
-					// end = slider.x + slider.w;
-					// distance for 100% = slider.w;
-					// actual distance = slider_bar.x - slider.x
-
-					// pcnt_done = actual_dist / max_dist
-
-
-					// pcnt_done = 
-					// value = max * pcnt_done;
-					*var = min + ((mouse_x - rect.x) * val_per_pixel);
-					slider.x = mouse_x - (slider.w / 2);
-				}
+				clamp_val_marker();
+				update_val();
 			}
 
 			selected = false;
@@ -358,31 +376,25 @@ namespace deft
 
 		void IntSlider::render()
 		{
-			if (selected)
-				render_selected();
-			else
+			SDL_Rect sdl_slider_bar = backend::_be_rect_to_sdl_rect(slider_bar);
+			SDL_Rect sdl_val_marker = backend::_be_rect_to_sdl_rect(val_marker);
+
+			backend::_be_fill_rect(&sdl_slider_bar, black);
+			backend::_be_fill_rect(&sdl_val_marker, blue);
+
+			backend::_be_render_text(name.c_str(), gadget_rect.x, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+
+			if (val != nullptr)
 			{
-				SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
-				SDL_Rect slider_rect = backend::_be_rect_to_sdl_rect(slider);
+				std::stringstream stream;
+				stream << std::setprecision(3) << *val;
 
-				backend::_be_fill_rect(&box_rect, light_gray);
-				backend::_be_outline_rect(&box_rect, black, 3);
-				backend::_be_fill_rect(&slider_rect, blue);
-			}
-
-			backend::_be_render_text(name.c_str(), rect.x - IntSlider::LABEL_PADDING + 5, rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
-
-			if (var != nullptr)
-				backend::_be_render_text(std::to_string(*var).c_str(), rect.x + IntSlider::SLIDER_BAR_W + 5, rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+				backend::_be_render_text(stream.str().c_str(), gadget_rect.x + gadget_rect.w - PANEL_PADDING - 5, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+			}				
 		}
 
 		void IntSlider::render_selected()
 		{
-			SDL_Rect box_rect = backend::_be_rect_to_sdl_rect(rect);
-			SDL_Rect slider_rect = backend::_be_rect_to_sdl_rect(slider);
-			backend::_be_fill_rect(&box_rect, light_gray);
-			backend::_be_outline_rect(&box_rect, black, 3);
-			backend::_be_fill_rect(&slider_rect, white);
 		}
 	}
 }

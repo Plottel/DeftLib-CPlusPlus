@@ -21,14 +21,14 @@ namespace deft
 				}
 			}
 
-			void _be_on_left_mouse_press(int mouse_x, int mouse_y)
+			void _be_on_left_mouse_down(int mouse_x, int mouse_y)
 			{
 				// Handle input for the clicked on panel, if any.
 				for (auto& panel : _be_panels)
 				{
 					if (geometry::pt_rect_collide(mouse_x, mouse_y, panel->rect))
 					{
-						panel->on_left_mouse_press(mouse_x, mouse_y);
+						panel->on_left_mouse_down(mouse_x, mouse_y);
 						return;
 					}
 				}

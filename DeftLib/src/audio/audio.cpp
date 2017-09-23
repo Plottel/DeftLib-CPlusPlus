@@ -29,14 +29,14 @@ namespace deft
 			Mix_PlayChannel(-1, sounds[name], count - 1); // SDL loops for one extra?
 		}
 
-		void load_sound(std::string name)
+		void load_sound(std::string name, std::string path)
 		{
-			sounds[name] = Mix_LoadWAV(name.c_str());
+			sounds[name] = Mix_LoadWAV(path.c_str());
 		}
 
-		void load_music(std::string name)
+		void load_music(std::string name, std::string path)
 		{
-			musics[name] = Mix_LoadMUS(name.c_str());
+			musics[name] = Mix_LoadMUS(path.c_str());
 		}
 
 		void play_music(std::string name)

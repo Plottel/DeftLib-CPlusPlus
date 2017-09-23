@@ -7,10 +7,10 @@ namespace deft
 	{
 		void init();
 		void quit();
-		void load_sound(std::string name);
+		void load_sound(std::string name, std::string path);
 		void play_sound(std::string name);
 		void loop_sound(std::string name, int count);
-		void load_music(std::string name);
+		void load_music(std::string name, std::string path);
 		void play_music(std::string name);
 		void pause_music();
 		void resume_music();

@@ -15,10 +15,12 @@ namespace deft
 			add_text_button("Toggle Music");
 		}
 
-		void MusicPlayerPanel::on_left_mouse_release(int mouse_x, int mouse_y)
+		void MusicPlayerPanel::on_event(int mouse_x, int mouse_y)
 		{
+			Panel::on_event(mouse_x, mouse_y);
+
 			if (clicked() == "Play Music")
-				audio::play_music("jumpshot.mp3");
+				audio::play_music("jumpshot");
 			if (clicked() == "Pause Music")
 				audio::pause_music();
 			if (clicked() == "Resume Music")
@@ -27,9 +29,6 @@ namespace deft
 				audio::stop_music();
 			if (clicked() == "Toggle Music")
 				audio::toggle_music();
-
-			// Unselect gadgets
-			Panel::on_left_mouse_release(mouse_x, mouse_y);
 		}
 	}
 }

@@ -8,11 +8,11 @@ namespace deft
 	{
 		typedef struct MusicPlayerPanel : Panel
 		{
-			static const int DEFAULT_H = 265;
-			static const int DEFAULT_W = 200;
+			static const int DEFAULT_H = 300;
+			static const int DEFAULT_W = 150;
 
 			MusicPlayerPanel(std::string panel_name, int x, int y, int w = DEFAULT_W, int h = DEFAULT_H);
-			virtual void on_left_mouse_release(int mouse_x, int mouse_y);
+			virtual void on_event(int mouse_x, int mouse_y);
 		} MusicPlayerPanel;
 	}
 }

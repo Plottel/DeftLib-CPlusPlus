@@ -17,7 +17,9 @@ namespace deft
 			std::string name;
 
 			virtual void on_left_mouse_release(int mouse_x, int mouse_y);
-			virtual void on_left_mouse_press(int mouse_x, int mouse_y);
+			virtual void on_left_mouse_down(int mouse_x, int mouse_y);
+
+			virtual void on_event(int mouse_x, int mouse_y) {}
 
 			void add_textbox(std::string label, std::string text);
 			void add_text_button(std::string label);
@@ -50,6 +52,4 @@ namespace deft
 			bool is_dragging_ = false;
 		} Panel;
 	}
-	
-
 }

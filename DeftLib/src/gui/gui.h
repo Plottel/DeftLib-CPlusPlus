@@ -9,7 +9,7 @@ namespace deft
 		namespace backend
 		{
 			void _be_on_left_mouse_release(int mouse_x, int mouse_y);
-			void _be_on_left_mouse_press(int mouse_x, int mouse_y);
+			void _be_on_left_mouse_down(int mouse_x, int mouse_y);
 		}
 
 		void add_panel(Panel* panel);

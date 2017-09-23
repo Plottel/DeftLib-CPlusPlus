@@ -1,6 +1,7 @@
 #include "panel.h"
 #include "../graphics/graphics_backend.h"
 #include "gadget_types.h"
+#include "../input/input.h"
 
 namespace deft
 {
@@ -9,7 +10,8 @@ namespace deft
 		const int TEXTBOX_HEIGHT = 100;
 		const int TEXT_BUTTON_HEIGHT = 40;
 		const int INT_SLIDER_HEIGHT = 20;
-		const int PANEL_PADDING = 15;
+		const int PANEL_PADDING_X = 15;
+		const int PANEL_PADDING_Y = 10;
 
 		void Panel::render()
 		{
@@ -30,6 +32,9 @@ namespace deft
 
 		std::string Panel::clicked()
 		{
+			if (!input::mouse_released(deft::LEFT_MOUSE))
+				return "";
+
 			for (auto& gadget : gadgets_)
 			{
 				if (gadget->selected)
@@ -41,6 +46,10 @@ namespace deft
 
 		void Panel::on_left_mouse_release(int mouse_x, int mouse_y)
 		{
+			// Handle sub panel event.
+			on_event(mouse_x, mouse_y);
+
+
 			is_dragging_ = false;
 
 			for (auto& gadget : gadgets_)
@@ -68,8 +77,12 @@ namespace deft
 			return Rect{ rect.x, rect.y, rect.w, 20 };
 		}
 
-		void Panel::on_left_mouse_press(int mouse_x, int mouse_y)
+		void Panel::on_left_mouse_down(int mouse_x, int mouse_y)
 		{
+			// Handle sub panel event.
+			on_event(mouse_x, mouse_y);
+
+			// Drag panel
 			if (geometry::pt_rect_collide(mouse_x, mouse_y, drag_rect()))
 			{
 				if (!is_dragging_)
@@ -124,9 +137,9 @@ namespace deft
 			{
 				box->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					rect.y + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					rect.y + 20 + PANEL_PADDING_Y,
+					rect.w - (PANEL_PADDING_X * 2),
 					TEXTBOX_HEIGHT
 				};
 			}
@@ -136,9 +149,9 @@ namespace deft
 
 				box->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING_Y,
+					rect.w - (PANEL_PADDING_X * 2),
 					TEXTBOX_HEIGHT
 				};
 			}
@@ -164,9 +177,9 @@ namespace deft
 			{
 				button->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					rect.y + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					rect.y + 20 + PANEL_PADDING_Y ,
+					rect.w - (PANEL_PADDING_X * 2),
 					TEXT_BUTTON_HEIGHT
 				};
 			}
@@ -176,9 +189,9 @@ namespace deft
 
 				button->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING_Y,
+					rect.w - (PANEL_PADDING_X * 2),
 					TEXT_BUTTON_HEIGHT
 				};
 			}
@@ -197,17 +210,17 @@ namespace deft
 			{
 				gadget->slider_bar = Rect
 				{
-					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
-					rect.y + PANEL_PADDING + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
+					rect.x + PANEL_PADDING_X + IntSlider::LABEL_PADDING,
+					rect.y + 20 + PANEL_PADDING_Y + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
 					IntSlider::SLIDER_BAR_W,
 					IntSlider::SLIDER_BAR_H
 				};
 
 				gadget->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					rect.y + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					rect.y + 20 + PANEL_PADDING_Y,
+					rect.w - (PANEL_PADDING_X * 2),
 					INT_SLIDER_HEIGHT
 				};
 			}
@@ -217,17 +230,17 @@ namespace deft
 
 				gadget->slider_bar = Rect
 				{
-					rect.x + PANEL_PADDING + IntSlider::LABEL_PADDING,
-					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
+					rect.x + PANEL_PADDING_X + IntSlider::LABEL_PADDING,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING_Y + (INT_SLIDER_HEIGHT / 2) - (IntSlider::SLIDER_BAR_H / 2),
 					IntSlider::SLIDER_BAR_W,
 					IntSlider::SLIDER_BAR_H
 				};
 
 				gadget->gadget_rect = Rect
 				{
-					rect.x + PANEL_PADDING,
-					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING,
-					rect.w - (PANEL_PADDING * 2),
+					rect.x + PANEL_PADDING_X,
+					last_gadget->gadget_rect.y + last_gadget->gadget_rect.h + PANEL_PADDING_Y,
+					rect.w - (PANEL_PADDING_X * 2),
 					INT_SLIDER_HEIGHT
 				};
 			}

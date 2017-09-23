@@ -11,20 +11,21 @@ int main(int argc, char* argv[])
 {
 	deft::init();
 
-	deft::load_sound("resources/hit.wav");
-	deft::load_sound("hit_2.wav");	
-	deft::load_sound("hit_3.wav");
-	deft::load_music("jumpshot.mp3");
+	deft::load_sound("hit", "resources/hit.wav");
+	deft::load_sound("hit_2", "resources/hit_2.wav");	
+	deft::load_sound("hit_3", "resources/hit_3.wav");
+	deft::load_music("jumpshot", "resources/jumpshot.mp3");
 
 	deft::Rect rect = deft::Rect{ 100, 600, 50, 50 };
 
 	// Allocate panels
 	deft::RectEditPanel* rect_edit = new deft::RectEditPanel("Rect Editor", 5, 5);
+	deft::MusicPlayerPanel* music_player = new deft::MusicPlayerPanel("Music Player", 600, 5);
+
 	rect_edit->set_edit_rect(&rect);
 
-	//deft::add_panel(asd);
-
 	deft::add_panel(rect_edit);
+	deft::add_panel(music_player);
 
 	while (true)
 	{
@@ -62,8 +63,9 @@ int main(int argc, char* argv[])
 	}
 
 	// Deallocate panels
-	//delete music;
 	delete rect_edit;
+	delete music_player;
+
 
 	return EXIT_SUCCESS;
 }

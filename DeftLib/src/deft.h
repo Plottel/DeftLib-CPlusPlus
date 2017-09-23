@@ -41,7 +41,7 @@ namespace deft
 			gui::backend::_be_on_left_mouse_release(input::mouse_x(), input::mouse_y());
 
 		if (input::mouse_down(LEFT_MOUSE)) // NOTE: mouse_down ATM
-			gui::backend::_be_on_left_mouse_press(input::mouse_x(), input::mouse_y());
+			gui::backend::_be_on_left_mouse_down(input::mouse_x(), input::mouse_y());
 	}
 
 	void process_systems()

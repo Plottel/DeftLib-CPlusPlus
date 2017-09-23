@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "\\DeftLib",
+    "\\DeftLib\\resources",
+    "\\DeftLib\\src\\audio",
+    "\\DeftLib\\src\\ecs",
+    "\\DeftLib\\src\\geometry",
+    "\\DeftLib\\src\\graphics",
+    "\\DeftLib\\src\\gui",
+    "\\DeftLib\\src\\input"
+  ],
+  "PreviewInSolutionExplorer": false
+}

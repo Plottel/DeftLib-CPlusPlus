@@ -1,12 +1,2 @@
-﻿  main.cpp
-c:\users\user\desktop\deftlib\deftlib\graphics_ui.h(118): error C2039: '_be_panels': is not a member of 'deft::graphics::backend'
-  c:\users\user\desktop\deftlib\deftlib\graphics_ui.h(109): note: see declaration of 'deft::graphics::backend'
-  c:\users\user\desktop\deftlib\deftlib\main.cpp(28): note: see reference to function template instantiation 'void deft::graphics::add_panel<std::unique_ptr<deft::graphics::MusicPlayerPanel,std::default_delete<_Ty>>>(T)' being compiled
-          with
-          [
-              _Ty=deft::graphics::MusicPlayerPanel,
-              T=std::unique_ptr<deft::graphics::MusicPlayerPanel,std::default_delete<deft::graphics::MusicPlayerPanel>>
-          ]
-c:\users\user\desktop\deftlib\deftlib\graphics_ui.h(118): error C2065: '_be_panels': undeclared identifier
-c:\users\user\desktop\deftlib\deftlib\graphics_ui.h(118): error C2228: left of '.push_back' must have class/struct/union
-  c:\users\user\desktop\deftlib\deftlib\graphics_ui.h(118): note: type is 'unknown-type'
+﻿  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\DeftLib\Debug\SDL_Proj.exe
+  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

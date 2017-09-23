@@ -1,96 +1,205 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="SDL2\BUGS.txt" />
+    <Text Include="SDL2\COPYING.txt" />
+    <Text Include="SDL2\README.txt" />
+    <Text Include="SDL2\README-SDL.txt" />
+    <Text Include="SDL2\WhatsNew.txt" />
+    <Text Include="Debug\SDL_Proj.Build.CppClean.log" />
+    <Text Include="Debug\SDL_Proj.log" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics_backend.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="deft.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="console.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics_ui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="panel_types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs_entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="src\deft.h" />
+    <ClInclude Include="src\input\input.h" />
+    <ClInclude Include="src\gui\gadget.h" />
+    <ClInclude Include="src\gui\gadget_types.h" />
+    <ClInclude Include="src\gui\gui.h" />
+    <ClInclude Include="src\gui\int_slider.h" />
+    <ClInclude Include="src\gui\music_player_panel.h" />
+    <ClInclude Include="src\gui\panel.h" />
+    <ClInclude Include="src\gui\panel_types.h" />
+    <ClInclude Include="src\gui\rect_edit_panel.h" />
+    <ClInclude Include="src\gui\text_box.h" />
+    <ClInclude Include="src\gui\text_button.h" />
+    <ClInclude Include="src\graphics\color.h" />
+    <ClInclude Include="src\graphics\graphics.h" />
+    <ClInclude Include="src\graphics\graphics_backend.h" />
+    <ClInclude Include="src\geometry\geometry.h" />
+    <ClInclude Include="src\ecs\ecs.h" />
+    <ClInclude Include="src\ecs\ecs_component.h" />
+    <ClInclude Include="src\ecs\ecs_entity.h" />
+    <ClInclude Include="src\ecs\ecs_system.h" />
+    <ClInclude Include="src\audio\audio.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SDL2\include\begin_code.h" />
+    <ClInclude Include="SDL2\include\close_code.h" />
+    <ClInclude Include="SDL2\include\SDL.h" />
+    <ClInclude Include="SDL2\include\SDL_assert.h" />
+    <ClInclude Include="SDL2\include\SDL_atomic.h" />
+    <ClInclude Include="SDL2\include\SDL_audio.h" />
+    <ClInclude Include="SDL2\include\SDL_bits.h" />
+    <ClInclude Include="SDL2\include\SDL_blendmode.h" />
+    <ClInclude Include="SDL2\include\SDL_clipboard.h" />
+    <ClInclude Include="SDL2\include\SDL_config.h" />
+    <ClInclude Include="SDL2\include\SDL_cpuinfo.h" />
+    <ClInclude Include="SDL2\include\SDL_egl.h" />
+    <ClInclude Include="SDL2\include\SDL_endian.h" />
+    <ClInclude Include="SDL2\include\SDL_error.h" />
+    <ClInclude Include="SDL2\include\SDL_events.h" />
+    <ClInclude Include="SDL2\include\SDL_filesystem.h" />
+    <ClInclude Include="SDL2\include\SDL_gamecontroller.h" />
+    <ClInclude Include="SDL2\include\SDL_gesture.h" />
+    <ClInclude Include="SDL2\include\SDL_haptic.h" />
+    <ClInclude Include="SDL2\include\SDL_hints.h" />
+    <ClInclude Include="SDL2\include\SDL_image.h" />
+    <ClInclude Include="SDL2\include\SDL_joystick.h" />
+    <ClInclude Include="SDL2\include\SDL_keyboard.h" />
+    <ClInclude Include="SDL2\include\SDL_keycode.h" />
+    <ClInclude Include="SDL2\include\SDL_loadso.h" />
+    <ClInclude Include="SDL2\include\SDL_log.h" />
+    <ClInclude Include="SDL2\include\SDL_main.h" />
+    <ClInclude Include="SDL2\include\SDL_messagebox.h" />
+    <ClInclude Include="SDL2\include\SDL_mixer.h" />
+    <ClInclude Include="SDL2\include\SDL_mouse.h" />
+    <ClInclude Include="SDL2\include\SDL_mutex.h" />
+    <ClInclude Include="SDL2\include\SDL_name.h" />
+    <ClInclude Include="SDL2\include\SDL_opengl.h" />
+    <ClInclude Include="SDL2\include\SDL_opengl_glext.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles2.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles2_gl2.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles2_gl2ext.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles2_gl2platform.h" />
+    <ClInclude Include="SDL2\include\SDL_opengles2_khrplatform.h" />
+    <ClInclude Include="SDL2\include\SDL_pixels.h" />
+    <ClInclude Include="SDL2\include\SDL_platform.h" />
+    <ClInclude Include="SDL2\include\SDL_power.h" />
+    <ClInclude Include="SDL2\include\SDL_quit.h" />
+    <ClInclude Include="SDL2\include\SDL_rect.h" />
+    <ClInclude Include="SDL2\include\SDL_render.h" />
+    <ClInclude Include="SDL2\include\SDL_revision.h" />
+    <ClInclude Include="SDL2\include\SDL_rwops.h" />
+    <ClInclude Include="SDL2\include\SDL_scancode.h" />
+    <ClInclude Include="SDL2\include\SDL_shape.h" />
+    <ClInclude Include="SDL2\include\SDL_stdinc.h" />
+    <ClInclude Include="SDL2\include\SDL_surface.h" />
+    <ClInclude Include="SDL2\include\SDL_system.h" />
+    <ClInclude Include="SDL2\include\SDL_syswm.h" />
+    <ClInclude Include="SDL2\include\SDL_test.h" />
+    <ClInclude Include="SDL2\include\SDL_test_assert.h" />
+    <ClInclude Include="SDL2\include\SDL_test_common.h" />
+    <ClInclude Include="SDL2\include\SDL_test_compare.h" />
+    <ClInclude Include="SDL2\include\SDL_test_crc32.h" />
+    <ClInclude Include="SDL2\include\SDL_test_font.h" />
+    <ClInclude Include="SDL2\include\SDL_test_fuzzer.h" />
+    <ClInclude Include="SDL2\include\SDL_test_harness.h" />
+    <ClInclude Include="SDL2\include\SDL_test_images.h" />
+    <ClInclude Include="SDL2\include\SDL_test_log.h" />
+    <ClInclude Include="SDL2\include\SDL_test_md5.h" />
+    <ClInclude Include="SDL2\include\SDL_test_random.h" />
+    <ClInclude Include="SDL2\include\SDL_thread.h" />
+    <ClInclude Include="SDL2\include\SDL_timer.h" />
+    <ClInclude Include="SDL2\include\SDL_touch.h" />
+    <ClInclude Include="SDL2\include\SDL_ttf.h" />
+    <ClInclude Include="SDL2\include\SDL_types.h" />
+    <ClInclude Include="SDL2\include\SDL_version.h" />
+    <ClInclude Include="SDL2\include\SDL_video.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics_backend.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="console.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics_ui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="panel_types.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ecs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\input\input.cpp" />
+    <ClCompile Include="src\gui\gui.cpp" />
+    <ClCompile Include="src\gui\int_slider.cpp" />
+    <ClCompile Include="src\gui\music_player_panel.cpp" />
+    <ClCompile Include="src\gui\panel.cpp" />
+    <ClCompile Include="src\gui\rect_edit_panel.cpp" />
+    <ClCompile Include="src\gui\text_box.cpp" />
+    <ClCompile Include="src\gui\text_button.cpp" />
+    <ClCompile Include="src\graphics\graphics.cpp" />
+    <ClCompile Include="src\graphics\graphics_backend.cpp" />
+    <ClCompile Include="src\ecs\ecs.cpp" />
+    <ClCompile Include="src\audio\audio.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libFLAC-8.dll" />
+    <None Include="libfreetype-6.dll" />
+    <None Include="libmodplug-1.dll" />
+    <None Include="libogg-0.dll" />
+    <None Include="libvorbis-0.dll" />
+    <None Include="libvorbisfile-3.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_mixer.dll" />
+    <None Include="SDL2_ttf.dll" />
+    <None Include="smpeg2.dll" />
+    <None Include="SDL2\docs\doxyfile" />
+    <None Include="SDL2\docs\README.md" />
+    <None Include="SDL2\docs\README-android.md" />
+    <None Include="SDL2\docs\README-cmake.md" />
+    <None Include="SDL2\docs\README-directfb.md" />
+    <None Include="SDL2\docs\README-dynapi.md" />
+    <None Include="SDL2\docs\README-emscripten.md" />
+    <None Include="SDL2\docs\README-gesture.md" />
+    <None Include="SDL2\docs\README-hg.md" />
+    <None Include="SDL2\docs\README-ios.md" />
+    <None Include="SDL2\docs\README-linux.md" />
+    <None Include="SDL2\docs\README-macosx.md" />
+    <None Include="SDL2\docs\README-nacl.md" />
+    <None Include="SDL2\docs\README-pandora.md" />
+    <None Include="SDL2\docs\README-platforms.md" />
+    <None Include="SDL2\docs\README-porting.md" />
+    <None Include="SDL2\docs\README-psp.md" />
+    <None Include="SDL2\docs\README-raspberrypi.md" />
+    <None Include="SDL2\docs\README-touch.md" />
+    <None Include="SDL2\docs\README-wince.md" />
+    <None Include="SDL2\docs\README-windows.md" />
+    <None Include="SDL2\docs\README-winrt.md" />
+    <None Include="SDL2\lib\x86\libFLAC-8.dll" />
+    <None Include="SDL2\lib\x86\libfreetype-6.dll" />
+    <None Include="SDL2\lib\x86\libjpeg-9.dll" />
+    <None Include="SDL2\lib\x86\libmodplug-1.dll" />
+    <None Include="SDL2\lib\x86\libogg-0.dll" />
+    <None Include="SDL2\lib\x86\libpng16-16.dll" />
+    <None Include="SDL2\lib\x86\libtiff-5.dll" />
+    <None Include="SDL2\lib\x86\libvorbis-0.dll" />
+    <None Include="SDL2\lib\x86\libvorbisfile-3.dll" />
+    <None Include="SDL2\lib\x86\libwebp-4.dll" />
+    <None Include="SDL2\lib\x86\SDL2.dll" />
+    <None Include="SDL2\lib\x86\SDL2_image.dll" />
+    <None Include="SDL2\lib\x86\SDL2_mixer.dll" />
+    <None Include="SDL2\lib\x86\SDL2_ttf.dll" />
+    <None Include="SDL2\lib\x86\smpeg2.dll" />
+    <None Include="SDL2\lib\x86\zlib1.dll" />
+    <None Include="SDL2\lib\x64\SDL2.dll" />
+    <None Include="Debug\NativeCodeAnalysis.read.1.tlog" />
+    <None Include="Debug\SDL2.dll" />
+    <None Include="Debug\SDL_Proj.tlog\SDL_Proj.lastbuildstate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\beat.wav" />
+    <Media Include="resources\hit.wav" />
+    <Media Include="resources\hit_2.wav" />
+    <Media Include="resources\hit_3.wav" />
+    <Media Include="resources\jumpshot.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\Calibri.ttf" />
+    <Font Include="resources\console_font.ttf" />
+    <Font Include="resources\lazy.ttf" />
+    <Font Include="resources\monaco.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="SDL2\lib\x86\SDL2.lib" />
+    <Library Include="SDL2\lib\x86\SDL2_image.lib" />
+    <Library Include="SDL2\lib\x86\SDL2_mixer.lib" />
+    <Library Include="SDL2\lib\x86\SDL2_ttf.lib" />
+    <Library Include="SDL2\lib\x86\SDL2main.lib" />
+    <Library Include="SDL2\lib\x86\SDL2test.lib" />
+    <Library Include="SDL2\lib\x64\SDL2.lib" />
+    <Library Include="SDL2\lib\x64\SDL2main.lib" />
+    <Library Include="SDL2\lib\x64\SDL2test.lib" />
   </ItemGroup>
 </Project>

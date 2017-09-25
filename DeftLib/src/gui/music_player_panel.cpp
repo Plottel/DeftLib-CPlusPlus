@@ -5,7 +5,7 @@ namespace deft
 {
 	namespace gui
 	{
-		MusicPlayerPanel::MusicPlayerPanel(std::string panel_name, int x, int y, int w, int h)
+		MusicPlayerPanel::MusicPlayerPanel(const std::string& panel_name, int x, int y, int w, int h)
 			: Panel(panel_name, x, y, w, h)
 		{
 			add_text_button("Play Music");

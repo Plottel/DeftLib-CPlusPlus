@@ -21,7 +21,7 @@ namespace deft
 			extern Font* font_16;
 			extern Font* font_24;
 
-			void render_text(const char* text, float x, float y, Color& clr, Font* font = font_10);
+			void render_text(const char* text, float x, float y, const Color& clr, Font* font = font_10);
 
 			SDL_Rect r_to_sdlr(deft::Rect& rect); // Helper
 

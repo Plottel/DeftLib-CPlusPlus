@@ -7,8 +7,7 @@ namespace deft
 	{
 		namespace backend
 		{
-			std::vector<Panel*> panels;
-			
+			std::vector<Panel*> panels;			
 
 			Panel* panel_at(int x, int y)
 			{

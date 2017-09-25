@@ -22,27 +22,27 @@ namespace deft
 			Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);		
 		}
 
-		void play_sound(string name)
+		void play_sound(const string& name)
 		{
 			Mix_PlayChannel(-1, backend::sounds[name], 0);
 		}
 
-		void loop_sound(string name, int count)
+		void loop_sound(const string& name, int count)
 		{
 			Mix_PlayChannel(-1, backend::sounds[name], count - 1); // SDL loops for one extra?
 		}
 
-		void load_sound(std::string name, std::string path)
+		void load_sound(const string& name, const string& path)
 		{
 			backend::sounds[name] = Mix_LoadWAV(path.c_str());
 		}
 
-		void load_music(std::string name, std::string path)
+		void load_music(const string& name, const string& path)
 		{
 			backend::musics[name] = Mix_LoadMUS(path.c_str());
 		}
 
-		void play_music(std::string name)
+		void play_music(const string& name)
 		{
 			Mix_PlayMusic(backend::musics[name], -1);
 			backend::_is_playing_music = true;

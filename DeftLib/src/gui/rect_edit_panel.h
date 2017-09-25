@@ -11,10 +11,10 @@ namespace deft
 			static const int DEFAULT_H = 160;
 			static const int DEFAULT_W = 160;
 
-			deft::Rect* edit_rect();
+			const deft::Rect* edit_rect();
 			void set_edit_rect(deft::Rect* edit_rect);
 
-			RectEditPanel(std::string panel_name, int x, int y, int w = DEFAULT_W, int h = DEFAULT_H);
+			RectEditPanel(const std::string& panel_name, int x, int y, int w = DEFAULT_W, int h = DEFAULT_H);
 
 		private:
 			deft::Rect* var;

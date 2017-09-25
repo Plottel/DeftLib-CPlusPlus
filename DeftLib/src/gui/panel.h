@@ -12,7 +12,7 @@ namespace deft
 	{
 		typedef struct Panel
 		{
-			Panel(std::string panel_name, int x, int y, int w, int h);
+			Panel(const std::string& panel_name, int x, int y, int w, int h);
 			~Panel();
 
 			std::string name;
@@ -23,12 +23,12 @@ namespace deft
 
 			virtual void on_event(int mouse_x, int mouse_y) {}
 
-			void add_textbox(std::string label, std::string text);
-			void add_text_button(std::string label);
-			void add_int_slider(std::string label, int* var);
+			void add_textbox(const std::string& label, const std::string& text);
+			void add_text_button(const std::string& label);
+			void add_int_slider(const std::string& label, int* var);
 
 			template<class T>
-			T* get_gadget(std::string name)
+			T* get_gadget(const std::string& name)
 			{
 				for (auto& gadget : gadgets_)
 				{
@@ -46,7 +46,7 @@ namespace deft
 			Rect drag_rect();
 
 			std::string clicked();
-			Gadget* last_added();
+			const Gadget* last_added();
 
 		private:
 			std::vector<Gadget*> gadgets_;

@@ -5,7 +5,7 @@ namespace deft
 {
 	namespace gui
 	{
-		RectEditPanel::RectEditPanel(std::string panel_name, int x, int y, int w, int h)
+		RectEditPanel::RectEditPanel(const std::string& panel_name, int x, int y, int w, int h)
 			: Panel(panel_name, x, y, w, h)
 		{
 			add_int_slider("X", nullptr);
@@ -14,7 +14,7 @@ namespace deft
 			add_int_slider("H", nullptr);
 		}
 
-		deft::Rect* RectEditPanel::edit_rect()
+		const deft::Rect* RectEditPanel::edit_rect()
 		{
 			return var;
 		}

@@ -118,7 +118,7 @@ namespace deft
 
 		}
 
-		Panel::Panel(std::string panel_name, int x, int y, int w, int h)
+		Panel::Panel(const std::string& panel_name, int x, int y, int w, int h)
 		{
 			name = panel_name;
 			rect = Rect{ x, y, w, h };
@@ -130,7 +130,7 @@ namespace deft
 				delete gadget;
 		}
 
-		void Panel::add_textbox(std::string label, std::string text)
+		void Panel::add_textbox(const std::string& label, const std::string& text)
 		{
 			TextBox* box = new TextBox();
 
@@ -164,14 +164,14 @@ namespace deft
 			gadgets_.push_back(box);
 		}
 
-		Gadget* Panel::last_added()
+		const Gadget* Panel::last_added()
 		{
 			if (gadgets_.empty())
 				return nullptr;
 			return gadgets_[gadgets_.size() - 1];
 		}
 
-		void Panel::add_text_button(std::string label)
+		void Panel::add_text_button(const std::string& label)
 		{
 			TextButton* button = new TextButton();
 
@@ -204,7 +204,7 @@ namespace deft
 			gadgets_.push_back(button);
 		}
 
-		void Panel::add_int_slider(std::string label, int* var)
+		void Panel::add_int_slider(const std::string& label, int* var)
 		{
 			IntSlider* gadget = new IntSlider();
 

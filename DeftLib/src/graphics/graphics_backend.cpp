@@ -159,7 +159,7 @@ namespace deft
 				SDL_Quit();
 			}
 
-			void render_text(const char* text, float x, float y, Color& clr, Font* font)
+			void render_text(const char* text, float x, float y, const Color& clr, Font* font)
 			{
 				SDL_Color sdl_clr = { clr.r, clr.g, clr.b, clr.a};
 

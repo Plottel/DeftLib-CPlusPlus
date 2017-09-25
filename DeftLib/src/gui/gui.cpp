@@ -1,5 +1,6 @@
 #include "gui.h"
 #include "../input/input.h"
+#include <memory>
 
 namespace deft
 {
@@ -7,14 +8,14 @@ namespace deft
 	{
 		namespace backend
 		{
-			std::vector<Panel*> panels;			
+			std::vector<std::unique_ptr<Panel>> panels;			
 
 			Panel* panel_at(int x, int y)
 			{
 				for (auto& panel : panels)
 				{
 					if (geometry::pt_rect_collide(x, y, panel->rect))
-						return panel;
+						return panel.get();
 				}
 
 				return nullptr;
@@ -61,9 +62,9 @@ namespace deft
 			}
 		}
 
-		void add_panel(Panel* panel)
+		void add_panel(std::unique_ptr<Panel> panel)
 		{
-			backend::panels.push_back(panel);
+			backend::panels.push_back(std::move(panel));
 		}
 
 		void render_gui()

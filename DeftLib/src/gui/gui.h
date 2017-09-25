@@ -1,6 +1,7 @@
 #pragma once
 
 #include "panel.h"
+#include <memory>
 
 namespace deft
 {
@@ -15,7 +16,7 @@ namespace deft
 		}
 
 		void handle_input_events();
-		void add_panel(Panel* panel);
+		void add_panel(std::unique_ptr<Panel> panel);
 		void render_gui();
 	}
 }

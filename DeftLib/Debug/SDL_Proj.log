@@ -1,2 +1,7 @@
-﻿  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\DeftLib\Debug\SDL_Proj.exe
+﻿  main.cpp
+c:\users\user\desktop\deftlib\deftlib\src\gui\gadget.h(24): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\deftlib\src\gui\gadget.h(25): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\deftlib\src\gui\gadget.h(26): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\deftlib\deftlib\src\gui\gadget.h(27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\DeftLib\Debug\SDL_Proj.exe
   SDL_Proj.vcxproj -> C:\Users\User\Desktop\DeftLib\DeftLib\Debug\SDL_Proj.pdb (Partial PDB)

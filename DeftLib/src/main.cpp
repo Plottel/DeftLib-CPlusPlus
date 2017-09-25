@@ -19,13 +19,14 @@ int main(int argc, char* argv[])
 	deft::Rect rect = deft::Rect{ 100, 600, 50, 50 };
 
 	// Allocate panels
-	deft::RectEditPanel* rect_edit = new deft::RectEditPanel("Rect Editor", 5, 5);
-	deft::MusicPlayerPanel* music_player = new deft::MusicPlayerPanel("Music Player", 600, 5);
+	auto rect_edit = std::make_unique<deft::RectEditPanel>(deft::RectEditPanel("Rect Editor", 5, 5));
+	auto music_player = std::make_unique<deft::MusicPlayerPanel>(deft::MusicPlayerPanel("Music Player", 600, 5));
 
 	rect_edit->set_edit_rect(&rect);
 
-	deft::add_panel(rect_edit);
-	deft::add_panel(music_player);
+	// No longer own panels! Must fetch from deft to use!
+	deft::add_panel(std::move(rect_edit));
+	deft::add_panel(std::move(music_player));
 
 	while (true)
 	{
@@ -61,11 +62,6 @@ int main(int argc, char* argv[])
 		// Refresh screen
 		deft::post_render();
 	}
-
-	// Deallocate panels
-	delete rect_edit;
-	delete music_player;
-
 
 	return EXIT_SUCCESS;
 }

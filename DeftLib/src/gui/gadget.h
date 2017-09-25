@@ -16,7 +16,7 @@ namespace deft
 			bool selected = false;
 
 			virtual void on_left_mouse_release(int mouse_x, int mouse_y) {}
-			virtual void on_left_mouse_press(int mouse_x, int mouse_y) {}
+			virtual void on_left_mouse_down(int mouse_x, int mouse_y) {}
 			virtual void render() = 0;
 
 			virtual void move_by(float x, float y)

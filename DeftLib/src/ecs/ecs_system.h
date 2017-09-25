@@ -14,8 +14,8 @@ namespace deft
 			{
 				for (auto& rect : rects)
 				{
-					SDL_Rect sdl_rect = graphics::backend::_be_rect_to_sdl_rect(rect);
-					deft::graphics::backend::_be_fill_rect(&sdl_rect, deft::blue);
+					SDL_Rect sdl_rect = graphics::backend::r_to_sdlr(rect);
+					deft::graphics::backend::fill_r(&sdl_rect, deft::blue);
 				}
 			}
 		} Sys_RectRendering;

@@ -15,19 +15,19 @@ namespace deft
 
 		void Panel::render()
 		{
-			SDL_Rect sdl_rect = graphics::backend::_be_rect_to_sdl_rect(rect);
-			SDL_Rect sdl_drag_rect = graphics::backend::_be_rect_to_sdl_rect(drag_rect());
+			SDL_Rect sdl_rect = graphics::backend::r_to_sdlr(rect);
+			SDL_Rect sdl_drag_rect = graphics::backend::r_to_sdlr(drag_rect());
 
-			graphics::backend::_be_fill_rect(&sdl_rect, light_gray);
-			graphics::backend::_be_fill_rect(&sdl_drag_rect, black);
-			graphics::backend::_be_outline_rect(&sdl_rect, dark_gray, 5);
-			graphics::backend::_be_outline_rect(&sdl_drag_rect, deft::dark_gray, 5);
+			graphics::backend::fill_r(&sdl_rect, light_gray);
+			graphics::backend::fill_r(&sdl_drag_rect, black);
+			graphics::backend::outline_r(&sdl_rect, dark_gray, 5);
+			graphics::backend::outline_r(&sdl_drag_rect, deft::dark_gray, 5);
 
 			for (auto& gadget : gadgets_)
 				gadget->render();
 
 			if (name != "")
-				graphics::backend::_be_render_text(name.c_str(), rect.x + 5, rect.y + 5, static_cast<Color>(deft::white), graphics::backend::font_16);
+				graphics::backend::render_text(name.c_str(), rect.x + 5, rect.y + 5, static_cast<Color>(deft::white), graphics::backend::font_16);
 		}
 
 		std::string Panel::clicked()
@@ -106,11 +106,16 @@ namespace deft
 					if (geometry::pt_rect_collide(mouse_x, mouse_y, gadget->gadget_rect))
 					{
 						gadget->selected = true;
-						gadget->on_left_mouse_press(mouse_x, mouse_y);
+						gadget->on_left_mouse_down(mouse_x, mouse_y);
 						return;
 					}
 				}
 			}
+		}
+
+		void Panel::on_key_typed(Key key)
+		{
+
 		}
 
 		Panel::Panel(std::string panel_name, int x, int y, int w, int h)

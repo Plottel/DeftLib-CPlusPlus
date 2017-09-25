@@ -13,28 +13,28 @@ namespace deft
 		{
 			typedef TTF_Font Font;
 
+			void init();
+
 			extern Font* font_10;
 			extern Font* font_12;
 			extern Font* font_14;
 			extern Font* font_16;
 			extern Font* font_24;
 
-			void _be_init();
+			void render_text(const char* text, float x, float y, Color& clr, Font* font = font_10);
 
-			SDL_Rect _be_rect_to_sdl_rect(deft::Rect& rect);
+			SDL_Rect r_to_sdlr(deft::Rect& rect); // Helper
 
-			void _be_outline_rect(SDL_Rect* rect, Color clr, int thickness=1);
-			void _be_fill_rect(SDL_Rect* rect, Color clr);
-			void _be_fill_circle(float x, float y, int radius, Color clr);
-			void _be_outline_circle(float x, float y, int radius, Color clr);
+			void outline_r(SDL_Rect* rect, Color clr, int thickness=1);
+			void fill_r(SDL_Rect* rect, Color clr);
+			void fill_circle(float x, float y, int radius, Color clr);
+			void outline_circle(float x, float y, int radius, Color clr);
 
 
-			void _be_pre_render();
-			void _be_post_render();
+			void pre_render();
+			void post_render();
 
-			void _be_quit();
-			
-			void _be_render_text(const char* text, float x, float y, Color& clr, Font* font=font_10);
+			void quit();
 		}
 	}
 }

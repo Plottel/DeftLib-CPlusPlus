@@ -1,6 +1,7 @@
 #pragma once
 
-#include <vector> 
+#include <vector>
+#include "../geometry/geometry.h"
 
 namespace deft
 {
@@ -164,17 +165,35 @@ namespace deft
 		RIGHT_MOUSE = 3
 	} MouseButton;
 
+	typedef enum InputEventType
+	{
+		MOUSE_RELEASED,
+		MOUSE_DOWN,
+		KEY_TYPED,
+	} InputEventType;
+
+	typedef struct InputEvent
+	{
+		InputEventType event;
+		Key key;
+		MouseButton btn;
+		Vec2 mouse_pos;
+	} InputEvent;	
+
 	namespace input
 	{
-		void get_input();
+		void pump_input_events();
 		bool key_down(Key key);		
 		bool key_typed(Key key);
 		bool key_released(Key key);
-		std::vector<std::string> get_held_keys();
 
+		const std::vector<InputEvent>& get_input_events();
+		std::vector<std::string> get_held_keys();
 
 		int mouse_x();
 		int mouse_y();
+		Vec2 mouse_pos();
+
 		bool mouse_down(MouseButton button);
 		bool mouse_pressed(MouseButton button);
 		bool mouse_released(MouseButton button);

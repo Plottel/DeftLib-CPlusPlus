@@ -7,8 +7,8 @@
 namespace deft
 {
 	namespace input
-	{		
-		namespace
+	{
+		namespace 
 		{
 			const int SDL_KEY_COUNT = 322;
 			const int MOUSE_BUTTON_COUNT = 2;
@@ -24,7 +24,14 @@ namespace deft
 
 			int _mouse_x = 0;
 			int _mouse_y = 0;
+
+			std::vector<InputEvent> _new_input_events;
 		}		
+
+		const std::vector<InputEvent>& get_input_events()
+		{
+			return _new_input_events;
+		}
 
 		// Refreshed each frame with new key down and key up events.
 		// Used to keep track of typed and released states.
@@ -42,16 +49,17 @@ namespace deft
 			return result;
 		}
 
-		void get_input()
+		void pump_input_events()
 		{
-
 			// Events from last frame no longer relevant.
 			// Typed and released is false for last frame's key events.
 			for (auto& key : _new_key_events)
 			{
 				_typed_keys[key] = false;
 				_released_keys[key] = false;
-			}				
+			}		
+
+			_new_input_events.clear();
 			_new_key_events.clear(); // Ready to process new events
 
 			// Reset pressed mouse buttons.
@@ -64,6 +72,16 @@ namespace deft
 
 			while (SDL_PollEvent(&e) != 0)
 			{
+				InputEvent deft_event;
+				deft_event.mouse_pos = Pt2{ (float)_mouse_x, (float)_mouse_y }; // Will be re-updated if a MouseMotion event.
+
+				if (mouse_down(LEFT_MOUSE)) // Will be overridden by a "real" event.
+				{
+					deft_event.event = MOUSE_DOWN;
+					deft_event.btn = LEFT_MOUSE;
+				}					
+
+				// Process SDL input for internal records
 				SDL_Keycode key;
 				auto b = e.button.button;
 
@@ -82,7 +100,14 @@ namespace deft
 					_down_keys[key] = true;
 
 					if (e.key.repeat == 0)
+					{
 						_typed_keys[key] = true;
+
+						// Deft only cares about key typed, not down.
+						deft_event.key = (Key)key;
+						deft_event.event = KEY_TYPED;
+					}
+
 					_new_key_events.push_back((Key)key);
 					break;
 
@@ -99,9 +124,13 @@ namespace deft
 
 				case SDL_MOUSEMOTION:
 					SDL_GetMouseState(&_mouse_x, &_mouse_y);
+					deft_event.mouse_pos = Vec2{ (float)_mouse_x, (float)_mouse_y };
 					break;
 
 				case SDL_MOUSEBUTTONDOWN:
+					deft_event.btn = (MouseButton)b;
+					deft_event.event = (InputEventType)MOUSE_DOWN;
+
 					if (b == SDL_BUTTON_LEFT)
 					{
 						_pressed_mouse_buttons[0] = true;
@@ -115,6 +144,9 @@ namespace deft
 					break;
 
 				case SDL_MOUSEBUTTONUP:
+					deft_event.btn = (MouseButton)b;
+					deft_event.event = (InputEventType)MOUSE_RELEASED;
+
 					if (b == SDL_BUTTON_LEFT)
 					{
 						_down_mouse_buttons[0] = false;
@@ -129,7 +161,9 @@ namespace deft
 
 				default:
 					break;
-				}					
+				}
+			
+				_new_input_events.push_back(deft_event);
 			}
 		}
 
@@ -166,6 +200,8 @@ namespace deft
 		int mouse_y()
 			{return _mouse_y;}
 
+		Vec2 mouse_pos()
+			{return { (float)_mouse_x, (float)_mouse_y };}
 
 		bool key_down(Key key)
 		{

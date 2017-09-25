@@ -9,61 +9,61 @@ namespace deft
 	{
 		void init()
 		{
-			backend::_be_init();
+			backend::init();
 		}
 
 		void outline_rect(float x, float y, float w, float h, Color clr, int thickness)
 		{
 			SDL_Rect rect = { x, y, w, h };
-			backend::_be_outline_rect(&rect, clr, thickness);
+			backend::outline_r(&rect, clr, thickness);
 		}
 
 		void outline_rect(Rect rect, Color clr, int thickness)
 		{
-			SDL_Rect sdl_rect = backend::_be_rect_to_sdl_rect(rect);
-			backend::_be_outline_rect(&sdl_rect, clr, thickness);
+			SDL_Rect sdl_rect = backend::r_to_sdlr(rect);
+			backend::outline_r(&sdl_rect, clr, thickness);
 		}
 
 		void fill_rect(float x, float y, float w, float h, Color clr)
 		{
 			SDL_Rect rect = { x, y, w, h };
-			backend::_be_fill_rect(&rect, clr);
+			backend::fill_r(&rect, clr);
 		}
 
 		void fill_rect(Rect rect, Color clr)
 		{
-			SDL_Rect sdl_rect = backend::_be_rect_to_sdl_rect(rect);
-			backend::_be_fill_rect(&sdl_rect, clr);
+			SDL_Rect sdl_rect = backend::r_to_sdlr(rect);
+			backend::fill_r(&sdl_rect, clr);
 		}
 
 		void outline_circle(Circle circle, Color clr)
 		{
-			backend::_be_outline_circle(circle.x, circle.y, circle.radius, clr);
+			backend::outline_circle(circle.x, circle.y, circle.radius, clr);
 		}
 
 		void fill_circle(Circle circle, Color clr)
 		{
-			backend::_be_fill_circle(circle.x, circle.y, circle.radius, clr);			
+			backend::fill_circle(circle.x, circle.y, circle.radius, clr);			
 		}		
 
 		void text(std::string text, float x, float y, Color& clr)
 		{
-			backend::_be_render_text(text.c_str(), x, y, clr);
+			backend::render_text(text.c_str(), x, y, clr);
 		}
 
 		void pre_render()
 		{
-			backend::_be_pre_render();
+			backend::pre_render();
 		}
 
 		void post_render()
 		{
-			backend::_be_post_render();
+			backend::post_render();
 		}
 
 		void quit()
 		{
-			backend::_be_quit();
+			backend::quit();
 		}
 	}	
 }

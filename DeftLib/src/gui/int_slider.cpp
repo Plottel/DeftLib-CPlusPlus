@@ -72,20 +72,20 @@ namespace deft
 
 		void IntSlider::render()
 		{
-			SDL_Rect sdl_slider_bar = graphics::backend::_be_rect_to_sdl_rect(slider_bar);
-			SDL_Rect sdl_val_marker = graphics::backend::_be_rect_to_sdl_rect(val_marker);
+			SDL_Rect sdl_slider_bar = graphics::backend::r_to_sdlr(slider_bar);
+			SDL_Rect sdl_val_marker = graphics::backend::r_to_sdlr(val_marker);
 
-			graphics::backend::_be_fill_rect(&sdl_slider_bar, black);
-			graphics::backend::_be_fill_rect(&sdl_val_marker, blue);
+			graphics::backend::fill_r(&sdl_slider_bar, black);
+			graphics::backend::fill_r(&sdl_val_marker, blue);
 
-			graphics::backend::_be_render_text(name.c_str(), gadget_rect.x, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+			graphics::backend::render_text(name.c_str(), gadget_rect.x, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
 
 			if (val != nullptr)
 			{
 				std::stringstream stream;
 				stream << std::setprecision(3) << *val;
 
-				graphics::backend::_be_render_text(stream.str().c_str(), gadget_rect.x + IntSlider::SLIDER_BAR_W + 30, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
+				graphics::backend::render_text(stream.str().c_str(), gadget_rect.x + IntSlider::SLIDER_BAR_W + 30, gadget_rect.y + 5, static_cast<Color>(black), deft::graphics::backend::font_14);
 			}
 		}
 

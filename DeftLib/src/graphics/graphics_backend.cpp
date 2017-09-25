@@ -18,7 +18,7 @@ namespace deft
 			Font* font_16 = nullptr;
 			Font* font_24 = nullptr;
 
-			void _be_init()
+			void init()
 			{
 				SDL_Init(SDL_INIT_EVERYTHING);
 				TTF_Init();
@@ -52,12 +52,12 @@ namespace deft
 				std::cout << TTF_GetError() << std::endl;
 			}
 
-			SDL_Rect _be_rect_to_sdl_rect(deft::Rect& rect)
+			SDL_Rect r_to_sdlr(deft::Rect& rect)
 			{
 				return SDL_Rect{ (int)rect.x, (int)rect.y, (int)rect.w, (int)rect.h };
 			}
 
-			void _be_outline_rect(SDL_Rect* rect, Color clr, int thickness)
+			void outline_r(SDL_Rect* rect, Color clr, int thickness)
 			{
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
 				SDL_RenderDrawRect(renderer, rect);				
@@ -77,13 +77,13 @@ namespace deft
 				SDL_RenderFillRect(renderer, &right);
 			}
 
-			void _be_fill_rect(SDL_Rect* rect, Color clr)
+			void fill_r(SDL_Rect* rect, Color clr)
 			{
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
 				SDL_RenderFillRect(renderer, rect);
 			}
 
-			void _be_fill_circle(float x, float y, int radius, Color clr)
+			void fill_circle(float x, float y, int radius, Color clr)
 			{
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
 
@@ -101,7 +101,7 @@ namespace deft
 				}
 			}
 
-			void _be_outline_circle(float x, float y, int radius, Color clr)
+			void outline_circle(float x, float y, int radius, Color clr)
 			{
 				// Draw a circle using Bresenham's circle drawing method.
 				SDL_SetRenderDrawColor(renderer, clr.r, clr.g, clr.b, clr.a);
@@ -133,18 +133,18 @@ namespace deft
 				}
 			}
 
-			void _be_pre_render()
+			void pre_render()
 			{
 				SDL_SetRenderDrawColor(renderer, 130, 139, 130, 255);
 				SDL_RenderClear(renderer);				
 			}
 
-			void _be_post_render()
+			void post_render()
 			{
 				SDL_RenderPresent(renderer);
 			}
 
-			void _be_quit()
+			void quit()
 			{
 				SDL_DestroyWindow(window);
 				SDL_DestroyRenderer(renderer);
@@ -159,7 +159,7 @@ namespace deft
 				SDL_Quit();
 			}
 
-			void _be_render_text(const char* text, float x, float y, Color& clr, Font* font)
+			void render_text(const char* text, float x, float y, Color& clr, Font* font)
 			{
 				SDL_Color sdl_clr = { clr.r, clr.g, clr.b, clr.a};
 

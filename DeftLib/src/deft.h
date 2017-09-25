@@ -35,13 +35,11 @@ namespace deft
 
 	void process_events()
 	{
-		input::get_input();
+		// Process events
+		input::pump_input_events();
 
-		if (input::mouse_released(LEFT_MOUSE))
-			gui::backend::_be_on_left_mouse_release(input::mouse_x(), input::mouse_y());
-
-		if (input::mouse_down(LEFT_MOUSE)) // NOTE: mouse_down ATM
-			gui::backend::_be_on_left_mouse_down(input::mouse_x(), input::mouse_y());
+		// With processed events, handle subsystem events.
+		gui::handle_input_events();
 	}
 
 	void process_systems()

@@ -2,6 +2,7 @@
 
 #include <string>
 #include "../geometry/geometry.h"
+#include "../input/input.h"
 #include <vector>
 #include "gadget.h"
 
@@ -18,6 +19,7 @@ namespace deft
 
 			virtual void on_left_mouse_release(int mouse_x, int mouse_y);
 			virtual void on_left_mouse_down(int mouse_x, int mouse_y);
+			virtual void on_key_typed(Key key);
 
 			virtual void on_event(int mouse_x, int mouse_y) {}
 
